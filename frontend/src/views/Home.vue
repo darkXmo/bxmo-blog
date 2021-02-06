@@ -1,15 +1,17 @@
 <template>
   <div class="home">
-    <a-button>123</a-button>
+    <Layout></Layout>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import Layout from "./layout/index.vue";
 
 export default defineComponent({
   name: 'Home',
   components: {
+    Layout
   },
 });
 </script>
