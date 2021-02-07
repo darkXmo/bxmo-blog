@@ -1,6 +1,10 @@
 <template>
   <div class="home">
-    <Layout></Layout>
+    <Layout>
+      <h1>
+        Content
+      </h1>
+    </Layout>
   </div>
 </template>
 

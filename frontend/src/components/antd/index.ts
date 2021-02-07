@@ -6,6 +6,6 @@ const antdImport = (app: App<Element>) => {
   app.use(Button);
 
   app.config.globalProperties.$message = message;
-}
+};
 
 export default antdImport;

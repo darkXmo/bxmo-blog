@@ -1,6 +1,12 @@
 <template>
   <div class="page-layout">
-    <TopNavigator></TopNavigator>
+    <nav>
+      <TopNavigator />
+    </nav>
+    <slot></slot>
+    <footer>
+      <PageFooter />
+    </footer>
   </div>
 </template>
 
@@ -9,11 +15,13 @@
 import { defineComponent } from 'vue';
 
 import TopNavigator from '@/components/TopNavigator.vue';
+import PageFooter from '@/components/PageFooter.vue';
 
 export default defineComponent({
   name: 'PageLayout',
   components: {
-    TopNavigator
+    TopNavigator,
+    PageFooter
   }
 });
 
