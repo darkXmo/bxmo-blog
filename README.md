@@ -41,9 +41,9 @@ cd ..
 cd deploy
 ```
 
-请检查 `docker-compose.yml` 文件，请将 volumes 设置成你的目录
+请检查 `docker-compose.yml` 文件，请将 volumes 设置成你的目录，以 `bxmo-blog` 为基准
 
-```conf
+```yml
 version: '3'
 
 services:  
@@ -53,7 +53,7 @@ services:
     - 80:80
     volumes: # :Todo 将 : 左边的部分设置成你的本地文件夹
     - /home/xmo/Documents/Code/Project/bxmo-blog/frontend/dist:/usr/share/nginx/html
-    - /home/xmo/Documents/Code/Project/bxmo-blog/default.conf:/etc/nginx/conf.d/default.conf
+    - /home/xmo/Documents/Code/Project/bxmo-blog/deploy/default.conf:/etc/nginx/conf.d/default.conf
     privileged: true
 ```
 
@@ -75,5 +75,11 @@ docker container stop <CONTAINER ID>
 
 ```bash
 docker container prune # 这个命令实际上会删除所有终止的容器
+```
+
+##### 进入容器
+
+```bash
+docker exec -it <CONTAINER ID> bash
 ```
 
