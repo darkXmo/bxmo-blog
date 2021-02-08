@@ -6,6 +6,6 @@ services:
     ports:
     - 80:80
     volumes: # :Todo
-    - /home/xmo/Documents/Code/Project/bxmo-blog/frontend/dist:/usr/share/nginx/html
-    - /home/xmo/Documents/Code/Project/bxmo-blog/default.conf:/etc/nginx/conf.d/default.conf
+    - /home/xmo/Documents/Code/Project/bxmo-blog/deploy/frontend/dist:/usr/share/nginx/html
+    - /home/xmo/Documents/Code/Project/bxmo-blog/deploy/default.conf:/etc/nginx/conf.d/default.conf
     privileged: true

@@ -65,3 +65,15 @@ docker-compose up -d
 
 项目将在 `localhost` 或 `localhost:80` 地址上部署。
 
+##### 终止
+
+```bash
+docker container stop <CONTAINER ID>
+```
+
+##### 删除
+
+```bash
+docker container prune # 这个命令实际上会删除所有终止的容器
+```
+
