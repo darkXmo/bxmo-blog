@@ -64,9 +64,9 @@ services:
     container_name: bxmo-blog-frontend
     ports:
     - 80:80
-    volumes: # :Todo 将 : 左边的部分设置成你的本地文件夹
-    - /home/xmo/Documents/Code/Project/bxmo-blog/frontend/dist:/usr/share/nginx/html
-    - /home/xmo/Documents/Code/Project/bxmo-blog/deploy/default.conf:/etc/nginx/conf.d/default.conf
+    volumes: # 相对路径
+    - ../frontend/dist:/usr/share/nginx/html
+    - ./default.conf:/etc/nginx/conf.d/default.conf
     privileged: true
 ```
 
@@ -86,11 +86,10 @@ docker-compose up -d
 >
 > 来进行构建
 
-如果你嫌麻烦，我也提供了一个脚本来帮助你进行构建部署前端，前提是你已经修改好了 `docker-compose.yml` 文件。
+如果你嫌麻烦，我也提供了一个脚本来帮助你进行构建部署前端，通过这种方式，可以直接在对应目录依次执行 `npm run build` + `docker-compose up -d`。
 
 ```bash
 # /bxmo-blog
-
 bash deploy.sh
 ```
 
