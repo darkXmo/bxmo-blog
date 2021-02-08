@@ -49,6 +49,7 @@ version: '3'
 services:  
   nginx: #服务名称
     image: nginx:latest
+    container_name: bxmo-blog-frontend
     ports:
     - 80:80
     volumes: # :Todo 将 : 左边的部分设置成你的本地文件夹
@@ -65,10 +66,26 @@ docker-compose up -d
 
 项目将在 `localhost` 或 `localhost:80` 地址上部署。
 
+> 如果 docker-compose up -d 提示已有容器，则应当输入
+>
+> ```bash
+> docker-compose up -d --force-recreate
+> ```
+>
+> 来进行构建
+
+如果你嫌麻烦，我也提供了一个脚本来帮助你进行构建部署前端，前提是你已经修改好了 `docker-compose.yml` 文件。
+
+```bash
+# /bxmo-blog
+
+bash deploy.sh
+```
+
 ##### 终止
 
 ```bash
-docker container stop <CONTAINER ID>
+docker container stop bxmo-blog-frontend
 ```
 
 ##### 删除
@@ -80,6 +97,6 @@ docker container prune # 这个命令实际上会删除所有终止的容器
 ##### 进入容器
 
 ```bash
-docker exec -it <CONTAINER ID> bash
+docker exec -it bxmo-blog-frontend bash
 ```
 
