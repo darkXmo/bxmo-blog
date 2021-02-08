@@ -3,6 +3,7 @@ version: '3'
 services:  
   nginx: #服务名称
     image: nginx:latest
+    container_name: bxmo-blog-frontend
     ports:
     - 80:80
     volumes: # :Todo 将 : 左边的部分设置成你的本地文件夹
