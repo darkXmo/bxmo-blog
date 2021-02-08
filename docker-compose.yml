@@ -1,0 +1,11 @@
+version: '3'
+
+services:  
+  nginx: #服务名称
+    image: nginx:latest
+    ports:
+    - 80:80
+    volumes: # :Todo
+    - /root/nginx/html:/var/www/html
+    - /root/nginx/nginx.conf:/home/xmo/Nginx
+    privileged: true
