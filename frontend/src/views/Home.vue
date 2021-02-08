@@ -2,7 +2,7 @@
   <div class="home">
     <Layout>
       <h1>
-        Content
+        Content - 2021-02-08 22:03
       </h1>
     </Layout>
   </div>
