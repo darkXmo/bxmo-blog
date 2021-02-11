@@ -1,6 +1,6 @@
 {
   "hooks": {
-    "pre-commit": "cd frontend && npm run lint"
+    "pre-commit": "cd frontend && lint-staged"
   }
 }
 
