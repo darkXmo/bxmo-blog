@@ -14,7 +14,17 @@
 > 3. Vuex
 > 4. Typescript
 > 5. babel
-> 6. eslint
+> 6. eslint - 仅使用了防止错误的推荐规范以及结尾必须加分号。
+
+##### commit 规范
+
+依照[文章](https://juejin.cn/post/6845166890373873677)
+
+> 1. [husky](https://github.com/typicode/husky)
+> 2. [lint-staged](https://github.com/okonet/lint-staged)
+> 3. [commitlint](https://github.com/conventional-changelog/commitlint)
+> 4. [commitizen](https://github.com/commitizen/cz-cli)
+> 5. [conventional-changelog](https://github.com/ajoslin/conventional-changelog)
 
 
 #### 安装教程
@@ -110,5 +120,35 @@ docker container prune # 这个命令实际上会删除所有终止的容器
 
 ```bash
 docker exec -it bxmo-blog-frontend bash
+```
+
+### 自构建部署
+
+推荐使用我写的 Docker镜像 - `xmolan:ubuntu:0.1` ，
+
+构建执行 `shell命令` 。
+
+```sh
+cd frontend
+npm install --production
+sudo npm run build
+sudo cp -af dist/. /var/www/html
+```
+
+### Git Commit规范
+
+支持 Angular 的 Commit message 格式。
+
+用 `npm run commit` 代替 `git commit` ，帮助输入规范化的 `commit` 内容。
+
+```bash
+git add .
+npm run commit
+```
+
+#### 生成 CHANGELOG
+
+```bash
+npm run changelog
 ```
 
