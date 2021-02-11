@@ -1,0 +1,6 @@
+{
+  "hooks": {
+    "pre-commit": "cd frontend && npm run lint"
+  }
+}
+
