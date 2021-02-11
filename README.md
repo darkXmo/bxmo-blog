@@ -90,6 +90,7 @@ docker-compose up -d
 
 ```bash
 # /bxmo-blog
+cd ./deploy
 bash deploy.sh
 ```
 

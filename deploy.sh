@@ -1,4 +1,4 @@
-cd frontend
+cd ../frontend
 npm run build
-cd ../deploy
+cd -
 docker-compose up -d --force-recreate
