@@ -1,5 +1,7 @@
 # frontend
 
+This project is based on vue3 and typesctipt.
+
 ## Project setup
 ```
 npm install
