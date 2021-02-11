@@ -1,9 +1,7 @@
 <template>
   <div class="home">
     <Layout>
-      <h1>
-        Content - 2021-02-11 15:33
-      </h1>
+      
     </Layout>
   </div>
 </template>
