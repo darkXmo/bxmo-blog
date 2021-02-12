@@ -12,8 +12,10 @@
 <script lang="ts">
 import Hero from '@/components/Hero.vue';
 import ArticleList from '@/components/List/ArticleList.vue';
-import { defineComponent } from 'vue';
-import Layout from "./layout/index.vue";
+import { defineComponent, onMounted } from 'vue';
+import Layout from "@/layouts/index.vue";
+
+import init from "@/controller/Home/initHomeArticleList";
 
 export default defineComponent({
   name: 'Home',
@@ -22,5 +24,10 @@ export default defineComponent({
     Hero,
     ArticleList
   },
+  setup() {
+    onMounted(() => {
+      init;
+    });
+  }
 });
 </script>

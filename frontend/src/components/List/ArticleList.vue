@@ -12,7 +12,7 @@
 <script lang="ts">
 import { defineComponent, reactive } from 'vue';
 
-import ArticleItemList from '@/interfaces/ArticleItemList';
+import ArticleItemList from '@/models/ArticleItemList';
 import ArticleItem from '../Item/ArticleItem.vue';
 
 export default defineComponent({

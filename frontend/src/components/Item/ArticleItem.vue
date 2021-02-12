@@ -10,7 +10,7 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
 
-import ArticleItem from '@/interfaces/ArticleItem';
+import ArticleItem from '@/models/ArticleItem';
 
 export default defineComponent({
   name: 'ArticleItem',
