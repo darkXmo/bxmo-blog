@@ -3,7 +3,7 @@
     <div class="left">
       <!-- 网站图标和名称 -->
       <a href="/" class="flex-align-center">
-        <img class="site-icon" src="@/../public/icon.png" alt="网站图标">
+        <img class="site-icon" src="@/assets/picture/icon.png" alt="网站图标">
         <span class="site-name">B-Xmo</span>
       </a>
     </div>

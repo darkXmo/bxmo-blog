@@ -21,6 +21,10 @@
     align-items: center;
   }
 
+  ul {
+    list-style: none;
+  }
+
   
 
 }

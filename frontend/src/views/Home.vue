@@ -1,19 +1,33 @@
 <template>
   <div class="home">
     <Layout>
-      
+      <Hero />
+      <div class="content">
+        <ArticleList />
+      </div>
     </Layout>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import Layout from "./layout/index.vue";
+import Hero from '@/components/Hero.vue';
+import ArticleList from '@/components/List/ArticleList.vue';
+import { defineComponent, onMounted } from 'vue';
+import Layout from "@/layouts/index.vue";
+
+import init from "@/controller/Home/initHomeArticleList";
 
 export default defineComponent({
   name: 'Home',
   components: {
-    Layout
+    Layout,
+    Hero,
+    ArticleList
   },
+  setup() {
+    onMounted(() => {
+      init;
+    });
+  }
 });
 </script>

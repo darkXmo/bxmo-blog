@@ -20,7 +20,7 @@ export default defineComponent({
     const dec: Function = () => {
       year.value -= 1;
     };
-
+    
     return {
       year,
       inc,
