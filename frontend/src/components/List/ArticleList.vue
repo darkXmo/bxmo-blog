@@ -2,7 +2,7 @@
   <div class="article-list">
     <ul>
       <li v-for="item in articles.value" :key="item.title">
-        <ArticleItem :value="{}"/>
+        <ArticleItem :value="{ }"/>
       </li>
     </ul>
   </div>
