@@ -1,8 +1,8 @@
 <template>
   <div class="article-list">
     <ul>
-      <li v-for="item in articles.value" :key="item.title">
-        <ArticleItem :value="{ }"/>
+      <li v-for="item in articles" :key="item.title">
+        <ArticleItem :value="item"/>
       </li>
     </ul>
   </div>
@@ -10,36 +10,25 @@
 
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue';
+import { defineComponent, PropType, reactive } from 'vue';
 
 import ArticleItemList from '@/models/ArticleItemList';
 import ArticleItem from '../Item/ArticleItem.vue';
 
 export default defineComponent({
   name: 'ArticleList',
-  setup() {
-    const articles: ArticleItemList = reactive({
-      value: [{
-        title: 'Vue3系列讲解',
-        abstract: `
-          1. Vue3相关新增和底层。
-          2. 监听 html 标签
-          3. 源视频
-        `,
-        author: 'Xmo',
-        date: new Date(),
-        tags: [{
-          value: 'Vue'
-        }, {
-          value: '原理'
-        }, {
-          value: 'Vue3'
-        }]
-      }]
-    });
+  props: {
+    articles: {
+      type: Object as PropType<ArticleItemList>,
+      required: true
+    }
+  },
+  setup(props) {
+    console.log(props.articles);
+    const articleItemList: ArticleItemList = reactive(props.articles);
 
     return {
-      articles
+      articleItemList
     };
   },
   components: {
