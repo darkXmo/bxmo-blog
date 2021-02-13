@@ -3,7 +3,7 @@
     <div class="left">
       <!-- 网站图标和名称 -->
       <a href="/" class="flex-align-center">
-        <img class="site-icon" src="@/assets/picture/icon.png" alt="网站图标">
+        <img class="site-icon" src="@/assets/img/icon.jpeg" alt="网站图标">
         <span class="site-name">B-Xmo</span>
       </a>
     </div>
@@ -70,6 +70,7 @@ export default defineComponent({
       >a {
         >img.site-icon {
           height: 3rem;
+          border-radius: 25%;
           margin-left: 2.5rem;
           margin-right: 1.5rem;
         }

@@ -23,7 +23,7 @@ export default defineComponent({
       required: true,
       default: '/'
     },
-    /**
+    /** 
      * 是否是站内链接
      */
     inPage: {

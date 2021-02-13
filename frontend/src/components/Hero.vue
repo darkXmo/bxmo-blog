@@ -6,7 +6,7 @@
       <h3>江山如画，一时多少豪杰</h3>
     </div>
     <!-- <a href="https://www.pixiv.net/artworks/68818298" class="avatar">
-      <img src="@/assets/picture/LS-full.jpg" alt="头像 @wube+岚少" title="@wube + 岚少，点击跳转作品源链接">
+      <img src="@/assets/img/LS-full.jpeg" alt="头像 @wube+岚少" title="@wube + 岚少，点击跳转作品源链接">
     </a> -->
   </div>
 </template>
@@ -25,7 +25,7 @@ export default defineComponent({
 .hero {
   padding: 150px 0;
   justify-content: space-around;
-  background-image: url('../assets/picture/hero-background.jpg');
+  background-image: url('../assets/img/hero-background.jpeg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
