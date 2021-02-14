@@ -1,5 +1,21 @@
 $font-default-color: hsl(120, 100%, 0%);
-$border-default: 1px solid #eaecef;
+$border-default-color: #eaecef;
+$border-default: 1px solid $border-default-color;
 $nav-hover-color: hsl(180, 100%, 30%);
-$default-span-weight: 500;
-$svg-default-color: #333333;
+$default-title-weight: 500;
+$svg-default-color: rgb(112, 112, 112);
+$box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.2);
+$box-shadow-hover: 0 2px 16px 0 rgba(0, 0, 0, 0.2);
+$item-align-margin: 20px;
+$item-list-padding: 30px 20px;
+$transition: .25s ease-in;
+$item-radius: 4px;
+$item-padding: 20px;
+$item-gap: 0.5rem;
+$hover-color: rgb(91, 169, 202);
+
+$article-title-color: rgb(69, 126, 168);
+$abstract-background-color: rgb(243, 244, 244);
+$abstract-padding: 20px 30px;
+$abstract-title-color: rgb(146, 192, 11);
+$bar-color: rgb(65, 147, 161);

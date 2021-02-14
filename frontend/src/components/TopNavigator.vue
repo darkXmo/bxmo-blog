@@ -4,7 +4,7 @@
       <!-- 网站图标和名称 -->
       <a href="/" class="flex-align-center">
         <img class="site-icon" src="@/assets/img/icon.jpeg" width="48px" height="48px" alt="网站图标">
-        <span class="site-name">B-Xmo</span>
+        <span class="site-name">{{siteName}}</span>
       </a>
     </div>
     <div class="right flex-align-center">
@@ -18,7 +18,7 @@
         <span>Github</span>
       </NavLink>
       <NavLink link="https://gitee.com/dXmo">
-        <IconFont type="icon-gitee-fill-round"/>
+        <IconFont type="icon-gitee"/>
         <span>Gitee</span>
       </NavLink>
       <NavLink link="https://dxmo.gitee.io/">
@@ -31,17 +31,15 @@
 
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import HomeFilled from '@ant-design/icons-vue/HomeFilled';
-import GithubFilled from '@ant-design/icons-vue/GithubFilled';
-import HistoryOutlined from "@ant-design/icons-vue/HistoryOutlined";
-import { createFromIconfontCN } from '@ant-design/icons-vue';
-const IconFont = createFromIconfontCN({
-  scriptUrl: '//at.alicdn.com/t/font_2369994_py72j28tfv.js',
-});
+import { defineComponent, ref } from 'vue';
+import { HomeFilled, GithubFilled, HistoryOutlined } from '@ant-design/icons-vue';
+import IconFont from '@/controller/utils/Icon';
 
 import NavLink from './NavLink.vue';
 
+/**
+ * 页面顶部导航栏，包括左侧的网页icon和右边的一些到git的跳转。
+ */
 export default defineComponent({
   name: 'TopNavigator',
   components: {
@@ -50,6 +48,14 @@ export default defineComponent({
     GithubFilled,
     HistoryOutlined,
     IconFont
+  },
+  setup() {
+    const SITE_NAME = 'B-Xmo';
+    const siteName = ref<string>(SITE_NAME);
+
+    return {
+      siteName
+    };
   }
 });
 

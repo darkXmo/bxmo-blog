@@ -1,9 +1,8 @@
 <template>
   <div class="hero flex-align-center">
     <div class="title-motto">
-      <h1>Blog of Xmo</h1>
-      <h2>乱石穿空，惊涛拍岸，卷起千堆雪</h2>
-      <h2>江山如画，一时多少豪杰</h2>
+      <h1>{{blogTitle}}</h1>
+      <h2>{{blogMotto}}</h2>
     </div>
     <!-- <a href="https://www.pixiv.net/artworks/68818298" class="avatar">
       <img src="@/assets/img/LS-full.jpeg" alt="头像 @wube+岚少" title="@wube + 岚少，点击跳转作品源链接">
@@ -13,10 +12,25 @@
 
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 
+/**
+ * 首页展示页内容 - 就那个大大的 Blog of Xmo，可调参数包括'标题'和'座右铭'
+ */
 export default defineComponent({
   name: 'Hero',
+  setup() {
+    const BLOG_TITLE = 'Blog of Xmo';
+    const BLOG_MOTTO = '乱石穿空，惊涛拍岸，卷起千堆雪\n江山如画，一时多少豪杰';
+    
+    const blogTitle = ref<string>(BLOG_TITLE);
+    const blogMotto = ref<string>(BLOG_MOTTO);
+
+    return {
+      blogTitle,
+      blogMotto
+    }
+  }
 });
 
 </script>
@@ -38,7 +52,8 @@ export default defineComponent({
     >h1 {
       font-size: 2.5rem;
     }
-    >h3 {
+    >h2 {
+      white-space: pre-line;
       font-size: 1.5rem;
     }
   }

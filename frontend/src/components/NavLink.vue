@@ -1,7 +1,7 @@
 <template>
   <div class="nav-link flex-align-center">
     <!-- 传入一个icon和一个span -->
-    <div @click="jump">
+    <div @click="jump" class="hover-underline">
       <slot></slot>
     </div>
   </div>
@@ -12,6 +12,9 @@
 import { defineComponent } from 'vue';
 import { useRouter } from 'vue-router';
 
+/**
+ * 输入一个链接，通过设置 inPage 参数来判断是否是站内链接。
+ */
 export default defineComponent({
   name: 'NavLink',
   props: {
@@ -56,25 +59,9 @@ export default defineComponent({
 .nav-link {
   line-height: 1.4rem;
   >div {
-    font-weight: $default-span-weight;
+    font-weight: $default-title-weight;
     >:first-child {
       margin-right: 5px;
-    }
-
-    &:hover {
-      transition: .2s ease-in-out;
-      cursor: pointer;
-      color: $nav-hover-color;
-      position: relative;
-      &::after {
-        position: absolute;
-        content: '';
-        bottom: -1px;
-        width: 100%;
-        left: 0;
-        height: 2px;
-        background-color: $nav-hover-color;
-      }
     }
   }
   

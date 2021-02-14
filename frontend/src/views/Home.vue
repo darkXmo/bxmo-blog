@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home-page">
     <Layout>
       <Hero />
       <div class="content">
@@ -24,8 +24,11 @@ import ArticleItemList from '@/models/ArticleItemList';
 // 引入controller组件
 import init from "@/controller/Home/initHomeArticleList";
 
+/**
+ * 首页
+ */
 export default defineComponent({
-  name: 'Home',
+  name: 'HomePage',
   components: {
     Layout,
     Hero,
@@ -43,3 +46,13 @@ export default defineComponent({
   }
 });
 </script>
+
+<style lang="scss">
+.home-page {
+  .content {
+    >.articles {
+      padding: $item-list-padding;
+    }
+  }
+}
+</style>

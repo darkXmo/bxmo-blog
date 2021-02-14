@@ -17,6 +17,9 @@ import { defineComponent } from 'vue';
 import TopNavigator from '@/components/TopNavigator.vue';
 import PageFooter from '@/components/PageFooter.vue';
 
+/**
+ * 总的页面布局
+ */
 export default defineComponent({
   name: 'PageLayout',
   components: {
@@ -29,6 +32,12 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .page-layout {
-
+  nav {
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 9;
+    box-shadow: $box-shadow;
+  }
 }
 </style>
