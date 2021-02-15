@@ -10,3 +10,8 @@ declare module '*.svg' {
   const component: DefineComponent;
   export default component;
 }
+
+declare module "*.jpeg" {
+  const value: any;
+  export default value;
+}

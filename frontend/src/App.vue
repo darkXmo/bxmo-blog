@@ -35,6 +35,16 @@
     background: $border-default-color;
   }
 
+  .default-card {
+    box-shadow: $box-shadow;
+    transition: $transition;
+    border-radius: $item-radius;
+    padding: $item-padding;
+    &:hover {
+      box-shadow: $box-shadow-hover;
+    }
+  }
+
   .hover-underline {
     position: relative;
     &::after {

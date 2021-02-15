@@ -54,7 +54,7 @@ export default defineComponent({
     const siteName = ref<string>(SITE_NAME);
 
     return {
-      siteName
+      siteName,
     };
   }
 });

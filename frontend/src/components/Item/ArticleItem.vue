@@ -1,5 +1,5 @@
 <template>
-  <div class="article-item">
+  <div class="article-item default-card">
     <h3 class="title">
       <span class="hover-underline">
         {{title}}
@@ -80,18 +80,12 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .article-item {
-  box-shadow: $box-shadow;
-  transition: $transition;
-  border-radius: $item-radius;
-  padding: $item-padding;
-  &:hover {
-    box-shadow: $box-shadow-hover;
-  }
 
   >h3.title {
     font-size: 1.5rem;
     font-weight: $default-title-weight;
     color: $article-title-color;
+    margin: $article-item-title-margin;
 
     &:hover {
       cursor: pointer;
@@ -108,6 +102,7 @@ export default defineComponent({
 
     h4 {
       color: $abstract-title-color;
+      font-size: $abstract-title-size;
     }
 
     p {

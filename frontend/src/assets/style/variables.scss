@@ -6,16 +6,26 @@ $default-title-weight: 500;
 $svg-default-color: rgb(112, 112, 112);
 $box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.2);
 $box-shadow-hover: 0 2px 16px 0 rgba(0, 0, 0, 0.2);
+
 $item-align-margin: 20px;
-$item-list-padding: 30px 20px;
+
 $transition: .25s ease-in;
 $item-radius: 4px;
 $item-padding: 20px;
 $item-gap: 0.5rem;
+$article-item-title-margin: 0 0 1.5rem 0;
 $hover-color: rgb(91, 169, 202);
 
 $article-title-color: rgb(69, 126, 168);
+$abstract-title-size: 1rem;
 $abstract-background-color: rgb(243, 244, 244);
 $abstract-padding: 20px 30px;
 $abstract-title-color: rgb(170, 0, 0);
 $bar-color: rgb(65, 147, 161);
+
+$page-content-padding: 30px 0px;
+$page-content-gap: 20px;
+
+$avatar-width: 128px;
+$avatar-height: 128px;
+$avatar-radius: 50%;

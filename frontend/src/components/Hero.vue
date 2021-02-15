@@ -4,9 +4,6 @@
       <h1>{{blogTitle}}</h1>
       <h2>{{blogMotto}}</h2>
     </div>
-    <!-- <a href="https://www.pixiv.net/artworks/68818298" class="avatar">
-      <img src="@/assets/img/LS-full.jpeg" alt="头像 @wube+岚少" title="@wube + 岚少，点击跳转作品源链接">
-    </a> -->
   </div>
 </template>
 

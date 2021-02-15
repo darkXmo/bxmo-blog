@@ -2,9 +2,14 @@
   <div class="home-page">
     <Layout>
       <Hero />
-      <div class="content">
-        <div class="articles">
-          <ArticleList v-if="ifHomeAritlces" :articles="homeArticles.value"/>
+      <div class="container">
+        <div class="content">
+          <div class="articles">
+            <ArticleList v-if="ifHomeAritlces" :articles="homeArticles.value"/>
+          </div>
+          <div class="information">
+            <SiteInfomation />
+          </div>
         </div>
       </div>
     </Layout>
@@ -23,6 +28,7 @@ import ArticleItemList from '@/models/ArticleItemList';
 
 // 引入controller组件
 import init from "@/controller/Home/initHomeArticleList";
+import SiteInfomation from '@/components/SiteInfomation.vue';
 
 /**
  * 首页
@@ -32,7 +38,8 @@ export default defineComponent({
   components: {
     Layout,
     Hero,
-    ArticleList
+    ArticleList,
+    SiteInfomation
   },
   setup() {
     const homeArticles: ArticleItemList = init();
@@ -49,10 +56,25 @@ export default defineComponent({
 
 <style lang="scss">
 .home-page {
-  .content {
-    >.articles {
-      padding: $item-list-padding;
+  .container {
+    display: flex;
+    justify-content: center;
+    .content {
+      max-width: 1260px;
+      display: flex;
+      justify-content: center;
+      >.articles {
+        padding: $page-content-padding;
+        margin-right: $page-content-gap;
+      }
+      >.information {
+        flex-shrink: 0;
+        box-sizing: border-box;
+        width: 300px;
+        padding: $page-content-padding;
+      }
     }
   }
+  
 }
 </style>
