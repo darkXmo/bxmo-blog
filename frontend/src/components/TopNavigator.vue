@@ -3,7 +3,7 @@
     <div class="left">
       <!-- 网站图标和名称 -->
       <a href="/" class="flex-align-center">
-        <img class="site-icon" src="@/assets/img/icon.jpeg" width="48px" height="48px" alt="网站图标">
+        <img class="site-icon" src="@/assets/img/icon.jpeg" width="48" height="48" alt="网站图标">
         <span class="site-name">{{siteName}}</span>
       </a>
     </div>
