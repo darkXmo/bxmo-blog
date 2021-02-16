@@ -9,6 +9,27 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
 
+  // 推荐输入animation-delay来进行设置延迟时间，实现按次序载入。
+  .loading-in {
+    @keyframes loadingin {
+      from { 
+        transform: translateY(-3rem); 
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    animation-name: loadingin;
+    animation-duration: .5s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-fill-mode: backwards;
+  }
+
+
   a {
     font-weight: 500;
     text-decoration: none;

@@ -1,6 +1,6 @@
 <template>
   <div class="hero flex-align-center">
-    <div class="title-motto">
+    <div class="title-motto loading-in">
       <h1>{{blogTitle}}</h1>
       <h2>{{blogMotto}}</h2>
     </div>

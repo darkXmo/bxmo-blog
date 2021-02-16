@@ -1,15 +1,13 @@
 <template>
   <div class="home-page">
     <Layout>
-      <Hero />
+      <Hero/>
       <div class="container">
-        <div class="content">
-          <div class="articles">
-            <ArticleList v-if="ifHomeAritlces" :articles="homeArticles.value"/>
-          </div>
-          <div class="information">
-            <SiteInfomation />
-          </div>
+        <div class="articles">
+          <ArticleList v-if="ifHomeAritlces" class="loading-in" :articles="homeArticles.value"/>
+        </div>
+        <div class="information">
+          <SiteInfomation class="loading-in"/>
         </div>
       </div>
     </Layout>
@@ -58,21 +56,22 @@ export default defineComponent({
 .home-page {
   .container {
     display: flex;
-    justify-content: center;
-    .content {
-      max-width: 1260px;
-      display: flex;
-      justify-content: center;
-      >.articles {
-        padding: $page-content-padding;
-        margin-right: $page-content-gap;
-      }
-      >.information {
-        flex-shrink: 0;
-        box-sizing: border-box;
-        width: 300px;
-        padding: $page-content-padding;
-      }
+    align-items: flex-start;
+    margin: 20px auto 0;
+    min-height: 100vh;
+    max-width: 1260px;
+    >.articles {
+      
+      flex: auto;
+      padding: $page-content-padding;
+      margin-right: $page-content-gap;
+    }
+    >.information {
+      flex-shrink: 0;
+      box-sizing: border-box;
+      flex: 0 0 300px;
+
+      padding: $page-content-padding;
     }
   }
   
