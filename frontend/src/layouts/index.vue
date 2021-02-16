@@ -10,24 +10,22 @@
   </div>
 </template>
 
-
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent } from "vue";
 
-import TopNavigator from '@/components/TopNavigator.vue';
-import PageFooter from '@/components/PageFooter.vue';
+import TopNavigator from "@/components/TopNavigator.vue";
+import PageFooter from "@/components/PageFooter.vue";
 
 /**
  * 总的页面布局
  */
 export default defineComponent({
-  name: 'PageLayout',
+  name: "PageLayout",
   components: {
     TopNavigator,
-    PageFooter
-  }
+    PageFooter,
+  },
 });
-
 </script>
 
 <style scoped lang="scss">

@@ -1,12 +1,12 @@
-version: '3'
+version: "3"
 
-services:  
+services:
   nginx: #服务名称
     image: nginx:latest
     container_name: bxmo-blog-frontend
     ports:
-    - 80:80
+      - 80:80
     volumes: # 相对路径
-    - ../frontend/dist:/usr/share/nginx/html
-    - ./default.conf:/etc/nginx/conf.d/default.conf
+      - ../frontend/dist:/usr/share/nginx/html
+      - ./default.conf:/etc/nginx/conf.d/default.conf
     privileged: true

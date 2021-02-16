@@ -3,7 +3,6 @@
  */
 interface Tag {
   value: string;
-  
 }
 
 export default Tag;

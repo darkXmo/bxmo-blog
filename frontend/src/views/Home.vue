@@ -1,13 +1,17 @@
 <template>
   <div class="home-page">
     <Layout>
-      <Hero/>
+      <Hero />
       <div class="container">
         <div class="articles">
-          <ArticleList v-if="ifHomeAritlces" class="loading-in" :articles="homeArticles.value"/>
+          <ArticleList
+            v-if="ifHomeAritlces"
+            class="loading-in"
+            :articles="homeArticles.value"
+          />
         </div>
         <div class="information">
-          <SiteInfomation class="loading-in"/>
+          <SiteInfomation class="loading-in" />
         </div>
       </div>
     </Layout>
@@ -16,28 +20,28 @@
 
 <script lang="ts">
 // 引入Vue组件或vue模块
-import Hero from '@/components/Hero.vue';
-import ArticleList from '@/components/List/ArticleList.vue';
-import { computed, defineComponent } from 'vue';
+import Hero from "@/components/Hero.vue";
+import ArticleList from "@/components/List/ArticleList.vue";
+import { computed, defineComponent } from "vue";
 import Layout from "@/layouts/index.vue";
 
 // 引入model组件
-import ArticleItemList from '@/models/ArticleItemList';
+import ArticleItemList from "@/models/ArticleItemList";
 
 // 引入controller组件
 import init from "@/controller/Home/initHomeArticleList";
-import SiteInfomation from '@/components/SiteInfomation.vue';
+import SiteInfomation from "@/components/SiteInfomation.vue";
 
 /**
  * 首页
  */
 export default defineComponent({
-  name: 'HomePage',
+  name: "HomePage",
   components: {
     Layout,
     Hero,
     ArticleList,
-    SiteInfomation
+    SiteInfomation,
   },
   setup() {
     const homeArticles: ArticleItemList = init();
@@ -46,9 +50,9 @@ export default defineComponent({
     });
     return {
       homeArticles,
-      ifHomeAritlces
+      ifHomeAritlces,
     };
-  }
+  },
 });
 </script>
 
@@ -60,13 +64,12 @@ export default defineComponent({
     margin: 20px auto 0;
     min-height: 100vh;
     max-width: 1260px;
-    >.articles {
-      
+    > .articles {
       flex: auto;
       padding: $page-content-padding;
       margin-right: $page-content-gap;
     }
-    >.information {
+    > .information {
       flex-shrink: 0;
       box-sizing: border-box;
       flex: 0 0 300px;
@@ -74,6 +77,5 @@ export default defineComponent({
       padding: $page-content-padding;
     }
   }
-  
 }
 </style>

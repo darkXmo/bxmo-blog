@@ -6,13 +6,14 @@ import { reactive } from "vue";
  * 返回首页文章列表
  */
 export default () => {
-  const homeArticles: ArticleItemList = reactive({value: []});
-  articleListReq.then((res) => {
-    homeArticles.value = res.data.articles;
-  }).catch((err) => {
-    console.log(err);
-  });
+  const homeArticles: ArticleItemList = reactive({ value: [] });
+  articleListReq
+    .then((res) => {
+      homeArticles.value = res.data.articles;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 
   return homeArticles;
-
 };

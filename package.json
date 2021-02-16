@@ -31,11 +31,24 @@
     "conventional-changelog-cli": "^2.1.1",
     "cz-conventional-changelog": "^3.3.0",
     "husky": "^4.3.8",
-    "lint-staged": "^10.5.4"
+    "lint-staged": "^10.5.4",
+    "prettier": "2.2.1"
   },
   "lint-staged": {
-    "frontend/src/**/*.vue": "vue-cli-service lint",
-    "frontend/src/**/*.ts": "eslint",
-    "frontend/src/**/*.js": "eslint"
+    "frontend/src/**/*.vue": [
+      "prettier --write",
+      "eslint --fix",
+      "git add"
+    ],
+    "frontend/src/**/*.ts": [
+      "prettier --write",
+      "eslint --fix",
+      "git add"
+    ],
+    "frontend/src/**/*.js": [
+      "prettier --write",
+      "eslint --fix",
+      "git add"
+    ]
   }
 }

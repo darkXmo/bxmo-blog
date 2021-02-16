@@ -1,6 +1,7 @@
 # Bxmo-blog
 
 #### 介绍
+
 用 Vue3+Typescript 写一个博客
 
 #### 软件架构
@@ -26,17 +27,14 @@
 > 4. [commitizen](https://github.com/commitizen/cz-cli)
 > 5. [conventional-changelog](https://github.com/ajoslin/conventional-changelog)
 
-
 #### 安装教程
 
-1.  
-	```bash
-	cd frontend
-	```
-	
-2. ```bash
-   npm install
-   ```
+1.  ```bash
+    cd frontend
+    ```
+2.  ```bash
+    npm install
+    ```
 
 #### 使用说明
 
@@ -66,17 +64,17 @@ cd deploy
 请检查 `docker-compose.yml` 文件，请将 volumes 设置成你的目录，以 `bxmo-blog` 为基准
 
 ```yml
-version: '3'
+version: "3"
 
-services:  
+services:
   nginx: #服务名称
     image: nginx:latest
     container_name: bxmo-blog-frontend
     ports:
-    - 80:80
+      - 80:80
     volumes: # 相对路径
-    - ../frontend/dist:/usr/share/nginx/html
-    - ./default.conf:/etc/nginx/conf.d/default.conf
+      - ../frontend/dist:/usr/share/nginx/html
+      - ./default.conf:/etc/nginx/conf.d/default.conf
     privileged: true
 ```
 
@@ -124,7 +122,7 @@ docker exec -it bxmo-blog-frontend bash
 
 ### 自构建部署
 
-推荐使用我写的 Docker镜像 - `xmolan:ubuntu:0.1` ，
+推荐使用我写的 Docker 镜像 - `xmolan:ubuntu:0.1` ，
 
 构建执行 `shell命令` 。
 
@@ -135,7 +133,7 @@ sudo npm run build
 sudo cp -af dist/. /var/www/html
 ```
 
-### Git Commit规范
+### Git Commit 规范
 
 支持 Angular 的 Commit message 格式。
 
@@ -151,4 +149,3 @@ npm run commit
 ```bash
 npm run changelog
 ```
-

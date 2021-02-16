@@ -1,10 +1,11 @@
 <template>
-  <router-view/>
+  <router-view />
 </template>
 
 <style lang="scss">
 #app {
-  font-family: Ubuntu,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+  font-family: Ubuntu, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Oxygen, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -12,8 +13,8 @@
   // 推荐输入animation-delay来进行设置延迟时间，实现按次序载入。
   .loading-in {
     @keyframes loadingin {
-      from { 
-        transform: translateY(-3rem); 
+      from {
+        transform: translateY(-3rem);
         opacity: 0;
       }
       to {
@@ -22,13 +23,12 @@
       }
     }
     animation-name: loadingin;
-    animation-duration: .5s;
+    animation-duration: 0.5s;
     animation-timing-function: ease-in-out;
     animation-iteration-count: 1;
     animation-direction: normal;
     animation-fill-mode: backwards;
   }
-
 
   a {
     font-weight: 500;
@@ -71,7 +71,7 @@
     &::after {
       transition: $transition;
       position: absolute;
-      content: '';
+      content: "";
       bottom: -0.2rem;
       left: 50%;
       transform: translateX(-50%);
@@ -88,12 +88,8 @@
       }
     }
   }
-
 }
 svg {
   color: $svg-default-color !important;
 }
-
-  
-
 </style>

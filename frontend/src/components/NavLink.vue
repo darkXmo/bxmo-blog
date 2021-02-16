@@ -7,16 +7,15 @@
   </div>
 </template>
 
-
 <script lang="ts">
-import { defineComponent } from 'vue';
-import { useRouter } from 'vue-router';
+import { defineComponent } from "vue";
+import { useRouter } from "vue-router";
 
 /**
  * 输入一个链接，通过设置 inPage 参数来判断是否是站内链接。
  */
 export default defineComponent({
-  name: 'NavLink',
+  name: "NavLink",
   props: {
     /**
      * 跳转的链接，如果是站内地址则应该是 RouterName
@@ -24,47 +23,43 @@ export default defineComponent({
     link: {
       type: String,
       required: true,
-      default: '/'
+      default: "/",
     },
-    /** 
+    /**
      * 是否是站内链接
      */
     inPage: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   setup(props) {
     const router = useRouter();
     const jump: Function = () => {
       if (props.inPage) {
         router.push({
-          name: props.link
+          name: props.link,
         });
-      }
-      else {
+      } else {
         window.open(props.link);
       }
     };
 
     return {
-      jump
+      jump,
     };
-  }
+  },
 });
-
 </script>
 
 <style scoped lang="scss">
 .nav-link {
   line-height: 1.4rem;
-  >div {
+  > div {
     font-weight: $default-title-weight;
-    >:first-child {
+    > :first-child {
       margin-right: 5px;
     }
   }
-  
-      
 }
 </style>

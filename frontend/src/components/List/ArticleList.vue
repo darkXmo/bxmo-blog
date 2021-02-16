@@ -2,48 +2,46 @@
   <div class="article-list">
     <ul>
       <li v-for="item in articles" :key="item.title">
-        <ArticleItem :value="item"/>
+        <ArticleItem :value="item" />
       </li>
     </ul>
   </div>
 </template>
 
-
 <script lang="ts">
-import { defineComponent, PropType, reactive } from 'vue';
+import { defineComponent, PropType, reactive } from "vue";
 
-import ArticleItemList from '@/models/ArticleItemList';
-import ArticleItem from '../Item/ArticleItem.vue';
+import ArticleItemList from "@/models/ArticleItemList";
+import ArticleItem from "../Item/ArticleItem.vue";
 
 /**
  * 文章项（由标题，概述和文章属性构成）的列表，用在首页。
  */
 export default defineComponent({
-  name: 'ArticleList',
+  name: "ArticleList",
   props: {
     articles: {
       type: Object as PropType<ArticleItemList>,
-      required: true
-    }
+      required: true,
+    },
   },
   setup(props) {
     const articleItemList: ArticleItemList = reactive(props.articles);
 
     return {
-      articleItemList
+      articleItemList,
     };
   },
   components: {
-    ArticleItem
-  }
+    ArticleItem,
+  },
 });
-
 </script>
 
 <style scoped lang="scss">
 .article-list {
-  >ul {
-    >*:not(:first-child) {
+  > ul {
+    > *:not(:first-child) {
       margin: $item-align-margin 0;
     }
   }
