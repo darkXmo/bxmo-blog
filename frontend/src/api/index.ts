@@ -5,6 +5,7 @@
  */
 const api = {
   GET_ARTICLE_LIST: "article/list",
+  GET_SITE_INFO: "site",
 };
 
 export default api;

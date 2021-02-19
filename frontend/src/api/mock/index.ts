@@ -1,6 +1,9 @@
 import ArticleItem from "@/models/ArticleItem";
 import Tag from "@/models/Tag";
 import Mock, { Random } from "mockjs";
+import API from "@/api";
+import Category from "@/models/Category";
+import FriendLink from "@/models/FriendLink";
 
 const baseUrl = "http://127.0.0.1:3000/";
 
@@ -31,14 +34,46 @@ const articleItem = () => {
   return item;
 };
 
+const category = () => {
+  const item: Category = {
+    value: Random.word(),
+    amount: Random.integer(1, 29),
+  };
+
+  return item;
+};
+
+const friendLink = () => {
+  const item: FriendLink = {
+    value: Random.url(),
+    name: Random.word(),
+  };
+  return item;
+};
+
 /**
  * Mock模拟数据
  */
 export default () => {
-  Mock.mock(baseUrl + "article/list", {
+  Mock.mock(baseUrl + API.GET_ARTICLE_LIST, {
     articles: Array(10)
       .fill(undefined)
       .map(() => articleItem()),
+  });
+
+  Mock.mock(baseUrl + API.GET_SITE_INFO, {
+    owner: "Xmo",
+    articleAmount: Random.integer(10, 99),
+    tagAmount: Random.integer(10, 99),
+    categories: Array(Random.integer(3, 10))
+      .fill(undefined)
+      .map(() => category()),
+    tags: Array(Random.integer(10, 20))
+      .fill(undefined)
+      .map(() => tag()),
+    friendLinks: Array(Random.integer(2, 3))
+      .fill(undefined)
+      .map(() => friendLink()),
   });
 };
 

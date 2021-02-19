@@ -40,7 +40,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, reactive, ref } from "vue";
+import { computed, defineComponent, PropType } from "vue";
 
 import ArticleItem from "@/models/ArticleItem";
 import Tag from "@/models/Tag";
@@ -60,11 +60,23 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const title = ref<string>(props.value.title);
-    const abstract = ref<string>(props.value.abstract);
-    const date = ref<string>(props.value.date.toString().substring(0, 10));
-    const author = ref<string>(props.value.author);
-    const tags: Array<Tag> = reactive(props.value.tags);
+    const title = computed((): string => {
+      return props.value.title;
+    });
+    const abstract = computed((): string => {
+      return props.value.abstract;
+    });
+    const date = computed((): string => {
+      return props.value.date.toString().substring(0, 10);
+    });
+    const author = computed((): string => {
+      return props.value.author;
+    });
+    const tags = computed(
+      (): Array<Tag> => {
+        return props.value.tags;
+      }
+    );
     return {
       title,
       abstract,
@@ -83,7 +95,6 @@ export default defineComponent({
 <style scoped lang="scss">
 .article-item {
   > h3.title {
-    font-size: 1.5rem;
     font-weight: $default-title-weight;
     color: $article-title-color;
     margin: $article-item-title-margin;

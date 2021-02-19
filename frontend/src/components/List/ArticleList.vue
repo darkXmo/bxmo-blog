@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, reactive } from "vue";
+import { computed, defineComponent, PropType } from "vue";
 
 import ArticleItemList from "@/models/ArticleItemList";
 import ArticleItem from "../Item/ArticleItem.vue";
@@ -26,7 +26,9 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const articleItemList: ArticleItemList = reactive(props.articles);
+    const articleItemList = computed(() => {
+      return props.articles;
+    });
 
     return {
       articleItemList,

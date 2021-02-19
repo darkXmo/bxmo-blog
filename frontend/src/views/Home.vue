@@ -11,7 +11,11 @@
           />
         </div>
         <div class="information">
-          <SiteInfomation class="loading-in" />
+          <SiteInfomation
+            v-if="ifSiteInfo"
+            :siteInfo="siteInfo"
+            class="loading-in"
+          />
         </div>
       </div>
     </Layout>
@@ -27,9 +31,13 @@ import Layout from "@/layouts/index.vue";
 
 // 引入model组件
 import ArticleItemList from "@/models/ArticleItemList";
+import SiteInfo from "@/models/SiteInfo";
 
 // 引入controller组件
-import init from "@/controller/Home/initHomeArticleList";
+import {
+  initArticles,
+  initSiteInfo,
+} from "@/controller/Home/initHomeArticleList";
 import SiteInfomation from "@/components/SiteInfomation.vue";
 
 /**
@@ -44,13 +52,19 @@ export default defineComponent({
     SiteInfomation,
   },
   setup() {
-    const homeArticles: ArticleItemList = init();
+    const homeArticles: ArticleItemList = initArticles();
+    const siteInfo: SiteInfo = initSiteInfo();
     const ifHomeAritlces = computed((): boolean => {
       return homeArticles.value.length > 0;
+    });
+    const ifSiteInfo = computed((): boolean => {
+      return siteInfo.owner.length > 0;
     });
     return {
       homeArticles,
       ifHomeAritlces,
+      siteInfo,
+      ifSiteInfo,
     };
   },
 });
@@ -70,7 +84,6 @@ export default defineComponent({
       margin-right: $page-content-gap;
     }
     > .information {
-      flex-shrink: 0;
       box-sizing: border-box;
       flex: 0 0 300px;
 

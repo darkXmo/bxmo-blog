@@ -46,6 +46,10 @@
     padding-left: 0;
   }
 
+  h3 {
+    font-size: 1.5rem;
+  }
+
   .ant-card-hoverable {
     cursor: inherit;
   }
