@@ -4,12 +4,13 @@ $border-default: 1px solid $border-default-color;
 $nav-hover-color: hsl(180, 100%, 30%);
 $default-title-weight: 500;
 $svg-default-color: rgb(112, 112, 112);
+$svg-default-size: 16px;
 $box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.2);
 $box-shadow-hover: 0 2px 16px 0 rgba(0, 0, 0, 0.2);
 
 $item-align-margin: 20px;
 
-$transition: 0.25s ease-in;
+$transition: 0.25s ease-in-out;
 $item-radius: 4px;
 $item-padding: 20px;
 $item-gap: 0.5rem;
@@ -32,3 +33,5 @@ $avatar-radius: 50%;
 
 $ani-delay-first-level: 0.5s;
 $ani-delay-second-level: 1s;
+
+$small-span: 0.8rem;

@@ -8,7 +8,12 @@
     Oxygen, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+
+  h1,
+  h2,
+  h3 {
+    text-align: center;
+  }
 
   // 推荐输入animation-delay来进行设置延迟时间，实现按次序载入。
   .loading-in {
