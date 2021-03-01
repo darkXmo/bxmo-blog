@@ -9,6 +9,10 @@
             class="loading-in"
             :articles="homeArticles.value"
           />
+          <Pagination
+            v-if="ifHomeAritlces"
+            :total="homeArticles.value.length"
+          />
         </div>
         <div class="information">
           <SiteInfomation
@@ -28,6 +32,7 @@ import Hero from "@/components/Hero.vue";
 import ArticleList from "@/components/List/ArticleList.vue";
 import { computed, defineComponent } from "vue";
 import Layout from "@/layouts/index.vue";
+import Pagination from "@/components/Pagination.vue";
 
 // 引入model组件
 import ArticleItemList from "@/models/ArticleItemList";
@@ -50,6 +55,7 @@ export default defineComponent({
     Hero,
     ArticleList,
     SiteInfomation,
+    Pagination,
   },
   setup() {
     const homeArticles: ArticleItemList = initArticles();
@@ -82,6 +88,11 @@ export default defineComponent({
       flex: auto;
       padding: $page-content-padding;
       margin-right: $page-content-gap;
+
+      > .ant-pagination {
+        display: flex;
+        float: right;
+      }
     }
     > .information {
       box-sizing: border-box;

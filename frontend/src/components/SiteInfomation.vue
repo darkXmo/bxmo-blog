@@ -33,14 +33,11 @@
         <h4>分类</h4>
       </div>
       <div class="category-list">
-        <div class="category-item" v-for="item in categories" :key="item.value">
-          <span class="category-value">{{ item.value }}</span>
-          <span
-            class="category-amount"
-            :style="`background-color: ${randomColor(70, 45, 0.8)}`"
-            >{{ item.amount }}</span
-          >
-        </div>
+        <CategoryItem
+          v-for="item in categories"
+          :key="item.value"
+          :item="item"
+        />
       </div>
     </div>
 
@@ -48,17 +45,11 @@
 
     <div class="tags">
       <div class="type">
-        <IconFont type="icon-category" />
+        <TagsFilled />
         <h4>标签</h4>
       </div>
       <div class="tag-list">
-        <span
-          class="tag-item"
-          v-for="item in tags"
-          :key="item.value"
-          :style="`background-color: ${randomColor(80, 40, 0.8)}`"
-          >{{ item.value }}</span
-        >
+        <TagItem v-for="item in tags" :key="item.value" :item="item" />
       </div>
     </div>
 
@@ -70,19 +61,22 @@
         <h4>友链</h4>
       </div>
       <div class="friend-link-list">
-        <div
-          class="friend-link-item hover-underline"
+        <FriendLinkItem
           v-for="item in friendLinks"
           :key="item.value"
-        >
-          {{ item.name }}
-        </div>
+          :item="item"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
+import CategoryItem from "./Item/CategoryItem.vue";
+import TagItem from "./Item/TagItem.vue";
+import FriendLinkItem from "./Item/FriendLinkItem.vue";
+import { TagsFilled } from "@ant-design/icons-vue";
+
 import { computed, defineComponent, PropType, ref } from "vue";
 import SiteInfo from "@/models/SiteInfo";
 import Category from "@/models/Category";
@@ -90,8 +84,6 @@ import Tag from "@/models/Tag";
 import FriendLink from "@/models/FriendLink";
 
 import IconFont from "@/controller/utils/Icon";
-
-import { randomColor } from "@/controller/utils/Random";
 
 export default defineComponent({
   name: "SiteInfomation",
@@ -103,6 +95,10 @@ export default defineComponent({
   },
   components: {
     IconFont,
+    CategoryItem,
+    TagItem,
+    FriendLinkItem,
+    TagsFilled,
   },
   setup(props) {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -146,7 +142,6 @@ export default defineComponent({
       categories,
       tags,
       friendLinks,
-      randomColor,
     };
   },
 });
@@ -157,9 +152,12 @@ export default defineComponent({
   $item-gap: 0.3rem;
 
   div.type {
+    font-size: 1rem;
+    font-weight: 500;
     padding: 1rem 1rem 0.5rem 0;
 
     > * {
+      display: inline-block;
       padding-right: 0.2rem;
     }
 
@@ -206,81 +204,19 @@ export default defineComponent({
   }
 
   > div.category {
-    svg {
-      font-size: $svg-default-size;
-    }
     padding-bottom: 1rem;
-    > div.category-list {
-      > div.category-item {
-        font-weight: 500;
-        margin: 0.5rem 0;
-        display: flex;
-        justify-content: space-between;
-        border-radius: $item-radius;
-        box-shadow: $box-shadow;
-        padding: 0.4rem 0.8rem;
-
-        transition: $transition;
-
-        &:hover {
-          cursor: pointer;
-          transform: scale(1.04);
-        }
-
-        > span.category-value {
-          color: $nav-hover-color;
-        }
-
-        > span.category-amount {
-          font-size: 0.9rem;
-          align-items: center;
-          color: #ffffff;
-          display: flex;
-          width: 1.6rem;
-          height: 1.6rem;
-          justify-content: center;
-          border-radius: $item-radius;
-        }
-      }
-    }
   }
   > div.tags {
     > .tag-list {
       padding-bottom: 1rem;
       display: flex;
       flex-wrap: wrap;
-      > .tag-item {
-        font-size: $small-span;
-        transition: $transition;
-        margin: $item-gap;
-        border-radius: $item-radius;
-        padding: 0.1rem 0.4rem;
-        display: flex;
-        color: #ffffff;
-        margin-right: 0.2rem;
-        &:hover {
-          cursor: pointer;
-          transform: scale(1.04);
-        }
-      }
     }
   }
 
   > div.friend-links {
     > div.friend-link-list {
       display: flex;
-
-      > div.friend-link-item {
-        margin: $item-gap;
-        box-shadow: $box-shadow;
-        padding: 0.1rem 0.4rem;
-        transition: $transition;
-
-        &:hover {
-          cursor: pointer;
-          transform: scale(1.04);
-        }
-      }
     }
   }
 }
