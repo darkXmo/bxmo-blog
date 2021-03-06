@@ -28,7 +28,7 @@ const md: MarkdownIt = new MarkdownIt({
         }
         return '<pre class="hljs"><code>' + html + "</code></pre>";
       } catch (__) {
-        console.log(__);
+        window.console.log(__);
       }
     }
     const preCode = md.utils.escapeHtml(str);

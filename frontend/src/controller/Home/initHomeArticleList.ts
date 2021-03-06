@@ -13,7 +13,7 @@ export const initArticles = () => {
       homeArticles.value = res.data.articles;
     })
     .catch((err) => {
-      console.log(err);
+      window.console.log(err);
     });
 
   return homeArticles;
@@ -50,7 +50,7 @@ export const initSiteInfo = () => {
       siteInfo.friendLinks = friendLinks;
     })
     .catch((err) => {
-      console.log(err);
+      window.console.log(err);
     });
 
   return siteInfo;

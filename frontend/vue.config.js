@@ -15,9 +15,9 @@ module.exports = {
     externals: {
       mockjs: "Mock",
       axios: "axios",
-      MarkdownIt: "markdown-it",
-      hljs: "highlight.js"
-      // 前面的vue指的是使用时的名字，后面的Vue是加载的包名
+      "markdown-it": "MarkdownIt",
+      "highlight.js": "hljs"
+      // 左边是 import 的内容，右边是在CDN里export的对象
     },
     plugins: [
       new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /zh-cn/),
