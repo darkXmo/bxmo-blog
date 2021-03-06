@@ -10,11 +10,6 @@ import { computed, defineComponent, ref } from "vue";
 import transformMarkdown from "@/controller/Publish/transformMarkdown";
 import { selectionPos } from "@/controller/utils/keyEvent";
 
-// 引入默认样式
-import "highlight.js/scss/default.scss";
-// 引入个性化的vs2015样式
-import "highlight.js/styles/vs2015.css";
-
 export default defineComponent({
   name: "MarkdownCom",
   setup() {
