@@ -15,6 +15,7 @@ module.exports = {
     externals: {
       mockjs: "Mock",
       axios: "axios",
+      MarkdownIt: "markdown-it"
       // 前面的vue指的是使用时的名字，后面的Vue是加载的包名
     },
     plugins: [

@@ -7,7 +7,7 @@
     "commit": "npm run clean && git add . && git-cz",
     "changelog": "conventional-changelog -p angular -i ./CHANGELOG.md -s -r 0",
     "deploy": "cd deploy && sh deploy.sh && cd ..",
-    "clean": "cd frontend && rm -rf dist && cd .."
+    "clean": "cd frontend && (rm -rf dist || del /q dist)&& cd .."
   },
   "config": {
     "commitizen": {

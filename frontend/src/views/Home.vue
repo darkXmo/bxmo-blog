@@ -22,6 +22,10 @@
           />
         </div>
       </div>
+      <div class="fix-button">
+        <GoLogin />
+        <GoPublish />
+      </div>
     </Layout>
   </div>
 </template>
@@ -33,6 +37,8 @@ import ArticleList from "@/components/List/ArticleList.vue";
 import { computed, defineComponent } from "vue";
 import Layout from "@/layouts/index.vue";
 import Pagination from "@/components/Pagination.vue";
+import GoPublish from "@/components/button/GoPublish.vue";
+import GoLogin from "@/components/button/GoLogin.vue";
 
 // 引入model组件
 import ArticleItemList from "@/models/ArticleItemList";
@@ -56,6 +62,8 @@ export default defineComponent({
     ArticleList,
     SiteInfomation,
     Pagination,
+    GoLogin,
+    GoPublish,
   },
   setup() {
     const homeArticles: ArticleItemList = initArticles();
@@ -99,6 +107,17 @@ export default defineComponent({
       flex: 0 0 300px;
 
       padding: $page-content-padding;
+    }
+  }
+
+  .fix-button {
+    position: fixed;
+    bottom: 4rem;
+    right: 5rem;
+    display: flex;
+    flex-direction: column;
+    > *:first-child {
+      margin-bottom: 0.5rem;
     }
   }
 }

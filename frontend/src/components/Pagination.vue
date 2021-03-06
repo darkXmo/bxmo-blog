@@ -8,7 +8,7 @@
 
 <script lang="ts">
 import { computed, defineComponent } from "vue";
-import { useRoute } from "vue-router";
+// import { useRoute } from "vue-router";
 export default defineComponent({
   props: {
     total: {
@@ -18,8 +18,8 @@ export default defineComponent({
   },
   setup() {
     const current = computed((): number => {
-      const route = useRoute();
-      console.log(route);
+      // const route = useRoute();
+      // console.log(route);
       return 0;
     });
 
