@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref, toRaw } from "vue";
+import { defineComponent, ref } from "vue";
 import Layout from "@/layouts/index.vue";
 import MarkdownCom from "@/components/markdown/MarkdownCom.vue";
 import MarkdownHead from "@/components/markdown/MarkdownHead.vue";
