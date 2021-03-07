@@ -1,4 +1,4 @@
-import { Button, Card, Pagination, Input } from "ant-design-vue";
+import { Button, Card, Pagination, Input, Select } from "ant-design-vue";
 import { App } from "vue";
 
 /**
@@ -10,6 +10,7 @@ const antdImport = (app: App<Element>) => {
   app.use(Card);
   app.use(Pagination);
   app.use(Input);
+  app.use(Select);
 };
 
 export default antdImport;

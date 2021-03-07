@@ -8,7 +8,8 @@
 <script lang="ts">
 import { computed, defineComponent, ref } from "vue";
 import transformMarkdown from "@/controller/Publish/transformMarkdown";
-import { selectionPos } from "@/controller/utils/keyEvent";
+
+import tabEvent from "@/controller/Publish/keyEvent";
 
 export default defineComponent({
   name: "MarkdownCom",
@@ -18,16 +19,10 @@ export default defineComponent({
       return transformMarkdown(rawStr.value);
     });
     const tab = (e: KeyboardEvent) => {
-      const textarea = document.getElementById("textarea");
-      if (textarea instanceof HTMLTextAreaElement) {
-        const pos = selectionPos(textarea);
-        textarea.value =
-          textarea.value.slice(0, pos) + "  " + textarea.value.slice(pos);
-        textarea.focus();
-        textarea.setSelectionRange(pos + 2, pos + 2);
-        rawStr.value = textarea.value;
+      const textArea = document.getElementById("textarea");
+      if (textArea instanceof HTMLTextAreaElement) {
+        tabEvent(e, rawStr, textArea);
       }
-      e.preventDefault();
     };
     return {
       rawStr,
@@ -56,6 +51,7 @@ export default defineComponent({
     border: $border-default;
     border-radius: 2px;
     background-color: #f7f7f7;
+    white-space: pre-wrap;
   }
 }
 </style>
