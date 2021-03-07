@@ -15,7 +15,7 @@ module.exports = {
     externals: {
       mockjs: "Mock",
       axios: "axios",
-      "markdown-it": "MarkdownIt",
+      "markdown-it": "markdownit",
       "highlight.js": "hljs"
       // 左边是 import 的内容，右边是在CDN里export的对象
     },
