@@ -75,6 +75,12 @@ export default () => {
       .fill(undefined)
       .map(() => friendLink()),
   });
+
+  Mock.mock(baseUrl + API.POST_LOGIN, {
+    username: "Xmo",
+    token:
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjE0NzYzOTM5fQ.DpLviZ40NS4pa3Ux4TZnnU0NEJNkRONQL8x5f_oTYM0",
+  });
 };
 
 // 输出结果

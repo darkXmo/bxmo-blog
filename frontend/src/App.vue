@@ -3,6 +3,7 @@
 </template>
 
 <style lang="scss">
+@import "./assets/style/markdown.scss";
 #app {
   font-family: Ubuntu, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
     Oxygen, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
@@ -13,6 +14,10 @@
   h2,
   h3 {
     text-align: center;
+  }
+
+  textarea {
+    resize: none;
   }
 
   // 推荐输入animation-delay来进行设置延迟时间，实现按次序载入。
@@ -100,47 +105,5 @@
 }
 svg {
   color: $svg-default-color !important;
-}
-
-pre.hljs {
-  padding: 8px 2px;
-  border-radius: 5px;
-  position: relative;
-  ol {
-    list-style: decimal;
-    margin: 0;
-    margin-left: 40px;
-    padding: 0;
-    li {
-      list-style: decimal-leading-zero;
-      position: relative;
-      padding-left: 10px;
-      .line-num {
-        position: absolute;
-        left: -40px;
-        top: 0;
-        width: 40px;
-        height: 100%;
-        border-right: 1px solid rgba(0, 0, 0, 0.66);
-        &::before {
-          content: "";
-          position: absolute;
-          width: 3px;
-          height: 2px;
-          right: 9px;
-          bottom: 7px;
-          background-color: rgb(30, 30, 30);
-        }
-      }
-    }
-  }
-  b.name {
-    position: absolute;
-    top: 2px;
-    right: 12px;
-    z-index: 10;
-    color: #999;
-    pointer-events: none;
-  }
 }
 </style>

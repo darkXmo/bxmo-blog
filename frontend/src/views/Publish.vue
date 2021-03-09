@@ -15,8 +15,8 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import Layout from "@/layouts/index.vue";
-import MarkdownCom from "@/components/markdown/MarkdownCom.vue";
-import MarkdownHead from "@/components/markdown/MarkdownHead.vue";
+import MarkdownCom from "@/components/Markdown/MarkdownCom.vue";
+import MarkdownHead from "@/components/Markdown/MarkdownHead.vue";
 import publish from "@/controller/Publish/publish";
 import ArticleInfo from "@/models/ArticleInfo";
 
@@ -49,7 +49,6 @@ export default defineComponent({
   .container {
     padding: 20px;
     > :nth-child(2) {
-      min-height: 65vh;
       margin-bottom: 1rem;
     }
     > :nth-child(3) {

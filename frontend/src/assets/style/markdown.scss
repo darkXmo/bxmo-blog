@@ -1,0 +1,94 @@
+#app .markdowned-area {
+  $color-markdown-code-bg: rgba(40, 46, 51, 0.05);
+  a {
+    color: #4183C4;
+    &:hover {
+      border-bottom: 2px solid #4183c480;
+    }
+  }
+
+  ul {
+    list-style: circle;
+    padding-left: 40px;
+    > * > ul {
+      list-style: square;
+    }
+  }
+
+  padding: 4px 11px;
+  border: $border-default;
+  border-radius: 2px;
+  background-color: #f7f7f7;
+
+  h1,
+  h2,
+  h3 {
+    text-align: left;
+    border-bottom: 2px solid $border-default-color;
+
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+
+  h1, h2, h3, h4, h5 {
+    font-weight: bold;
+  }
+
+  p {
+    > code {
+      padding: 0.2em 0.4em;
+      margin: 0;
+      background-color: $color-markdown-code-bg;
+      border-radius: 6px;
+    }
+  }
+
+  pre.hljs {
+    padding: 8px 2px;
+    border-radius: 5px;
+    position: relative;
+    ol {
+      list-style: decimal;
+      margin: 0;
+      margin-left: 40px;
+      padding: 0;
+      li {
+        list-style: decimal-leading-zero;
+        position: relative;
+        padding-left: 10px;
+        .line-num {
+          position: absolute;
+          left: -40px;
+          top: 0;
+          width: 40px;
+          height: 100%;
+          border-right: 1px solid rgba(0, 0, 0, 0.66);
+          &::before {
+            content: "";
+            position: absolute;
+            width: 3px;
+            height: 2px;
+            right: 9px;
+            bottom: 7px;
+            background-color: rgb(30, 30, 30);
+          }
+        }
+      }
+    }
+    b.name {
+      position: absolute;
+      top: 2px;
+      right: 12px;
+      z-index: 10;
+      color: #999;
+      pointer-events: none;
+    }
+  }
+}

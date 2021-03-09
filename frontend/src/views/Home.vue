@@ -23,7 +23,8 @@
         </div>
       </div>
       <div class="fix-button">
-        <GoLogin />
+        <LoginModal v-if="!logined" />
+        <LogoutConfirm v-else />
         <GoPublish />
       </div>
     </Layout>
@@ -37,8 +38,9 @@ import ArticleList from "@/components/List/ArticleList.vue";
 import { computed, defineComponent } from "vue";
 import Layout from "@/layouts/index.vue";
 import Pagination from "@/components/Pagination.vue";
-import GoPublish from "@/components/button/GoPublish.vue";
-import GoLogin from "@/components/button/GoLogin.vue";
+import LoginModal from "@/components/Modal/LoginModal.vue";
+import GoPublish from "@/components/Button/GoPublish.vue";
+import LogoutConfirm from "@/components/Confirm/LogoutConfirm.vue";
 
 // 引入model组件
 import ArticleItemList from "@/models/ArticleItemList";
@@ -50,6 +52,8 @@ import {
   initSiteInfo,
 } from "@/controller/Home/initHomeArticleList";
 import SiteInfomation from "@/components/SiteInfomation.vue";
+import { Store, useStore } from "vuex";
+import { RootState } from "@/store/types";
 
 /**
  * 首页
@@ -62,7 +66,8 @@ export default defineComponent({
     ArticleList,
     SiteInfomation,
     Pagination,
-    GoLogin,
+    LogoutConfirm,
+    LoginModal,
     GoPublish,
   },
   setup() {
@@ -74,11 +79,16 @@ export default defineComponent({
     const ifSiteInfo = computed((): boolean => {
       return siteInfo.owner.length > 0;
     });
+    const store: Store<RootState> = useStore();
+    const logined = computed((): boolean => {
+      return store.getters["user/logined"];
+    });
     return {
       homeArticles,
       ifHomeAritlces,
       siteInfo,
       ifSiteInfo,
+      logined,
     };
   },
 });

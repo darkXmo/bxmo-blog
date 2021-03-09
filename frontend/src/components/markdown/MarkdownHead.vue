@@ -50,9 +50,14 @@ export default defineComponent({
 
     const tagsList = computed(
       (): Array<string> => {
-        const ans = tags.value.split("|").filter((value) => {
-          return value !== "";
-        });
+        const ans = tags.value
+          .split("|")
+          .filter((value) => {
+            return value !== "";
+          })
+          .map((value) => {
+            return value.trim();
+          });
         return ans;
       }
     );

@@ -10,6 +10,7 @@ import { computed, defineComponent, ref } from "vue";
 import transformMarkdown from "@/controller/Publish/transformMarkdown";
 
 import tabEvent from "@/controller/Publish/keyEvent";
+// import "@/assets/style/github.css";
 
 export default defineComponent({
   name: "MarkdownCom",
@@ -36,38 +37,16 @@ export default defineComponent({
 <style scoped lang="scss">
 .markdown-com {
   display: grid;
-  height: 100%;
+  height: 70vh;
   grid-template-columns: 1fr 1fr;
-  textarea {
-    resize: none;
-  }
 
   > * {
     overflow: auto;
-  }
-
-  > .markdowned-area {
-    padding: 4px 11px;
-    border: $border-default;
-    border-radius: 2px;
-    background-color: #f7f7f7;
-    white-space: pre-wrap;
   }
 }
 </style>
 <style lang="scss">
 .markdown-com {
-  $color-markdown-code-bg: rgba(27, 31, 35, 0.05);
-  p {
-    > code {
-      padding: 0.2em 0.4em;
-      margin: 0;
-      font-size: 85%;
-      background-color: $color-markdown-code-bg;
-      border-radius: 6px;
-    }
-  }
-
   /* 滚动槽 */
   ::-webkit-scrollbar {
     width: 6px;
