@@ -18,7 +18,7 @@
 import { defineComponent, ref, toRaw } from "vue";
 import { LoginOutlined } from "@ant-design/icons-vue";
 import { Store, useStore } from "vuex";
-import login from "@/controller/Login/login";
+import { login } from "@/controller/Login/login";
 import { RootState } from "@/store/types";
 import LoginForm from "../Form/LoginForm.vue";
 import { ValidateErrorEntity } from "node_modules/ant-design-vue/lib/form/interface";

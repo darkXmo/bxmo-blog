@@ -22,7 +22,7 @@
   </a-form>
 </template>
 <script lang="ts">
-import { LoginFormComponent } from "@/components";
+import { LoginFormComponent, Rules } from "@/components";
 import LoginForm from "@/models/LoginForm";
 import { UserOutlined, LockOutlined } from "@ant-design/icons-vue";
 import { defineComponent, reactive, ref, UnwrapRef } from "vue";
@@ -37,7 +37,7 @@ export default defineComponent({
     const layout = {
       wrapperCol: { span: 24 },
     };
-    const rules = {
+    const rules: Rules = {
       username: [
         { required: true, message: "Please input username", trigger: "blur" },
         { min: 3, max: 5, message: "Length should be 3 to 5", trigger: "blur" },

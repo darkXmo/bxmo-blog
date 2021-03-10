@@ -13,6 +13,9 @@
 import { defineComponent } from "vue";
 import { message } from "ant-design-vue";
 import GoLogout from "../Button/GoLogout.vue";
+import { Store, useStore } from "vuex";
+import { RootState } from "@/store/types";
+import { logout } from "@/controller/Login/login";
 
 export default defineComponent({
   name: "LogoutConfirm",
@@ -20,9 +23,10 @@ export default defineComponent({
     GoLogout,
   },
   setup() {
-    const confirm = (e: MouseEvent) => {
-      console.log(e);
+    const store: Store<RootState> = useStore();
+    const confirm = () => {
       message.success("确认登出");
+      logout(store);
     };
 
     const cancel = (e: MouseEvent) => {

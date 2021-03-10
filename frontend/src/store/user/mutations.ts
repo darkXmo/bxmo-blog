@@ -4,6 +4,11 @@ import { MutationTree } from "vuex";
 import { UserState } from "./types";
 import { mutationsType } from "./types";
 
+const emptyState: Record<string, string> = {
+  username: "",
+  token: "",
+};
+
 export const mutations: MutationTree<UserState> = {
   /**
    * 更新用户状态
@@ -12,5 +17,10 @@ export const mutations: MutationTree<UserState> = {
    */
   [mutationsType.SAVE_USER_INFO](state, userState: UserState) {
     state = Object.assign(state, userState);
+  },
+
+  [mutationsType.CLEAR_USER_INFO](state) {
+    // eslint-disable-line
+    state = Object.assign(state, emptyState);
   },
 };
