@@ -38,6 +38,12 @@ $side-bar-ul-padding: 1.5rem 0;
   box-sizing: border-box;
   border-right: $border-default;
   overflow-y: auto;
+  background: rgb(237, 237, 237);
+  background: linear-gradient(
+    180deg,
+    rgb(237, 237, 237) 0%,
+    rgb(255, 255, 255) 1%
+  );
 
   > .sidebar-links {
     padding: $side-bar-ul-padding;
