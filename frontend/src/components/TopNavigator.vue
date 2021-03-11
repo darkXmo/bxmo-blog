@@ -73,7 +73,7 @@ export default defineComponent({
 .top-navigator {
   position: sticky;
   top: 0;
-  height: 64px;
+  height: 4rem;
   display: flex;
   justify-content: space-between;
   box-sizing: border-box;

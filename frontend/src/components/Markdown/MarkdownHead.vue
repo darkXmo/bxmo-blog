@@ -37,6 +37,7 @@
 
 <script lang="ts">
 import ArticleInfo from "@/models/ArticleInfo";
+import Tag from "@/models/Tag";
 import { computed, defineComponent, ref } from "vue";
 
 export default defineComponent({
@@ -49,14 +50,14 @@ export default defineComponent({
     const categoryList: Array<string> = ["前端", "后端", "运维", "闲事", "AI"];
 
     const tagsList = computed(
-      (): Array<string> => {
+      (): Array<Tag> => {
         const ans = tags.value
           .split("|")
           .filter((value) => {
             return value !== "";
           })
           .map((value) => {
-            return value.trim();
+            return { value: value.trim() };
           });
         return ans;
       }

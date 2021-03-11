@@ -41,7 +41,6 @@
   }
 
   a {
-    font-weight: 500;
     text-decoration: none;
     color: $font-default-color;
   }
@@ -103,6 +102,10 @@
     }
   }
 }
+a {
+  font-weight: 500;
+}
+
 svg {
   color: $svg-default-color !important;
 }

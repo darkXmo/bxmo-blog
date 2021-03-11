@@ -4,6 +4,8 @@ import Mock, { Random } from "mockjs";
 import API from "@/api";
 import Category from "@/models/Category";
 import FriendLink from "@/models/FriendLink";
+import Article from "@/models/Article";
+import UserState from "@/models/UserState";
 
 const baseUrl = "http://127.0.0.1:3000/";
 
@@ -51,6 +53,28 @@ const friendLink = () => {
   return item;
 };
 
+const article = () => {
+  const item: Article = {
+    belong: null,
+    content: Random.cparagraph(),
+    title: Random.ctitle(),
+    category: Random.cword(),
+    tags: Array(Random.integer(1, 4))
+      .fill(undefined)
+      .map(() => tag()),
+  };
+  return item;
+};
+
+const userInfo = () => {
+  const item: UserState = {
+    username: "Xmo",
+    token:
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjE0NzYzOTM5fQ.DpLviZ40NS4pa3Ux4TZnnU0NEJNkRONQL8x5f_oTYM0",
+  };
+  return item;
+};
+
 /**
  * Mock模拟数据
  */
@@ -76,11 +100,9 @@ export default () => {
       .map(() => friendLink()),
   });
 
-  Mock.mock(baseUrl + API.POST_LOGIN, {
-    username: "Xmo",
-    token:
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjE0NzYzOTM5fQ.DpLviZ40NS4pa3Ux4TZnnU0NEJNkRONQL8x5f_oTYM0",
-  });
+  Mock.mock(baseUrl + API.POST_LOGIN, userInfo());
+
+  Mock.mock(baseUrl + API.GET_ARTICLE, article());
 };
 
 // 输出结果

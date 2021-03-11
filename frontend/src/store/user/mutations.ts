@@ -19,8 +19,8 @@ export const mutations: MutationTree<UserState> = {
     state = Object.assign(state, userState);
   },
 
+  // eslint-disable-next-line
   [mutationsType.CLEAR_USER_INFO](state) {
-    // eslint-disable-line
     state = Object.assign(state, emptyState);
   },
 };

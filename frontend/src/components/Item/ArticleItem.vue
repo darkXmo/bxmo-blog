@@ -1,6 +1,6 @@
 <template>
   <div class="article-item default-card">
-    <h3 class="title">
+    <h3 class="title" @click="goCheck">
       <span class="hover-underline">
         {{ title }}
       </span>
@@ -47,6 +47,8 @@ import Tag from "@/models/Tag";
 import { TagsFilled } from "@ant-design/icons-vue";
 
 import Iconfont from "@/controller/utils/Icon";
+import { Router, useRouter } from "vue-router";
+import { getRandomInt } from "@/controller/utils/Random";
 
 /**
  * 文章项（由标题，概述和文章属性构成），该组件设置文章项的结构。
@@ -77,12 +79,23 @@ export default defineComponent({
         return props.value.tags;
       }
     );
+
+    const router: Router = useRouter();
+    const goCheck = () => {
+      router.push({
+        name: "Article",
+        params: {
+          id: getRandomInt(),
+        },
+      });
+    };
     return {
       title,
       abstract,
       date,
       author,
       tags,
+      goCheck,
     };
   },
   components: {

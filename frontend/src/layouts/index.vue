@@ -30,6 +30,7 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .page-layout {
+  min-width: 960px;
   nav {
     position: sticky;
     top: 0;
