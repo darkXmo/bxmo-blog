@@ -39,7 +39,8 @@ export default defineComponent({
   display: grid;
   height: 70vh;
   grid-template-columns: 1fr 1fr;
-
+  border: $border-default;
+  background-color: #f7f7f7;
   > * {
     overflow: auto;
   }

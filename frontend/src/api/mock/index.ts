@@ -6,6 +6,7 @@ import Category from "@/models/Category";
 import FriendLink from "@/models/FriendLink";
 import Article from "@/models/Article";
 import UserState from "@/models/UserState";
+import articleContent from "@/api/mock/articleContent";
 
 const baseUrl = "http://127.0.0.1:3000/";
 
@@ -56,7 +57,7 @@ const friendLink = () => {
 const article = () => {
   const item: Article = {
     belong: null,
-    content: Random.cparagraph(),
+    content: articleContent(),
     title: Random.ctitle(),
     category: Random.cword(),
     tags: Array(Random.integer(1, 4))

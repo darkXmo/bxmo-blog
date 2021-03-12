@@ -15,7 +15,6 @@ import { useRoute } from "vue-router";
 import { getArticle } from "@/controller/Article/getArticle";
 import Article from "@/models/Article";
 import ArticleContent from "./components/ArticleContent.vue";
-
 export default defineComponent({
   name: "ArticlePage",
   components: {
@@ -49,6 +48,7 @@ export default defineComponent({
 <style scoped lang="scss">
 .article-page {
   .content {
+    margin-left: 20rem;
     min-height: 85vh;
   }
 }
