@@ -16,7 +16,7 @@
         placeholder="点击选择分类"
         id="category"
         style="width: 20vw"
-        ref="select"
+        ref="categorySelect"
       >
         <a-select-option
           v-for="item in categoryList"
@@ -25,25 +25,18 @@
           >{{ item }}</a-select-option
         >
       </a-select>
-      <label for="category">所属书目</label>
+      <label for="book">所属书目</label>
       <a-select
         v-model:value="book"
-        placeholder="点击选择书目"
-        id="category"
+        placeholder="点击选择 书目"
+        id="book"
         style="width: 20vw"
-        ref="select"
+        ref="bookSelect"
       >
         <template #dropdownRender="{ menuNode: menu }">
           <v-nodes :vnodes="menu" />
           <a-divider style="margin: 4px 0" />
-          <div
-            style="padding: 4px 8px; cursor: pointer"
-            @mousedown="(e) => e.preventDefault()"
-            @click="addItem"
-          >
-            <plus-outlined />
-            新书
-          </div>
+          <NewBook @confirm="addItem" />
         </template>
         <a-select-option v-for="item in bookList" :value="item" :key="item">{{
           item
@@ -67,23 +60,28 @@
 import ArticleInfo from "@/models/ArticleInfo";
 import Tag from "@/models/Tag";
 import { computed, defineComponent, ref } from "vue";
-import { PlusOutlined } from "@ant-design/icons-vue";
+import NewBook from "./components/NewBook.vue";
 
 export default defineComponent({
   name: "MarkdownHead",
   components: {
-    PlusOutlined,
+    NewBook,
     VNodes: (_, { attrs }) => {
       return attrs.vnodes;
     },
   },
   setup() {
     const title = ref<string>("");
-    const category = ref<string>("前端");
     const tags = ref<string>("");
     const abstract = ref<string>("");
 
-    const categoryList: Array<string> = ["前端", "后端", "运维", "闲事", "AI"];
+    const categoryList = ref<Array<string>>([
+      "前端",
+      "后端",
+      "运维",
+      "闲事",
+      "AI",
+    ]);
     const bookList = ref<Array<string>>([
       "Vue3",
       "typescript",
@@ -93,6 +91,7 @@ export default defineComponent({
     ]);
 
     const book = ref<string>(bookList.value[0]);
+    const category = ref<string>(categoryList.value[0]);
 
     const tagsList = computed(
       (): Array<Tag> => {
@@ -121,8 +120,8 @@ export default defineComponent({
       }
     );
 
-    const addItem = () => {
-      bookList.value.push(`New item`);
+    const addItem = (newBook: string) => {
+      bookList.value.push(newBook);
     };
 
     return {
@@ -167,3 +166,5 @@ export default defineComponent({
   }
 }
 </style>
+
+<style lang="scss"></style>
