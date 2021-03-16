@@ -25,6 +25,30 @@
           >{{ item }}</a-select-option
         >
       </a-select>
+      <label for="category">所属书目</label>
+      <a-select
+        v-model:value="book"
+        placeholder="点击选择书目"
+        id="category"
+        style="width: 20vw"
+        ref="select"
+      >
+        <template #dropdownRender="{ menuNode: menu }">
+          <v-nodes :vnodes="menu" />
+          <a-divider style="margin: 4px 0" />
+          <div
+            style="padding: 4px 8px; cursor: pointer"
+            @mousedown="(e) => e.preventDefault()"
+            @click="addItem"
+          >
+            <plus-outlined />
+            新书
+          </div>
+        </template>
+        <a-select-option v-for="item in bookList" :value="item" :key="item">{{
+          item
+        }}</a-select-option>
+      </a-select>
       <label for="tags">标签</label>
       <a-input
         v-model:value="tags"
@@ -43,9 +67,16 @@
 import ArticleInfo from "@/models/ArticleInfo";
 import Tag from "@/models/Tag";
 import { computed, defineComponent, ref } from "vue";
+import { PlusOutlined } from "@ant-design/icons-vue";
 
 export default defineComponent({
   name: "MarkdownHead",
+  components: {
+    PlusOutlined,
+    VNodes: (_, { attrs }) => {
+      return attrs.vnodes;
+    },
+  },
   setup() {
     const title = ref<string>("");
     const category = ref<string>("前端");
@@ -53,6 +84,15 @@ export default defineComponent({
     const abstract = ref<string>("");
 
     const categoryList: Array<string> = ["前端", "后端", "运维", "闲事", "AI"];
+    const bookList = ref<Array<string>>([
+      "Vue3",
+      "typescript",
+      "ES+",
+      "css",
+      "日记",
+    ]);
+
+    const book = ref<string>(bookList.value[0]);
 
     const tagsList = computed(
       (): Array<Tag> => {
@@ -81,13 +121,20 @@ export default defineComponent({
       }
     );
 
+    const addItem = () => {
+      bookList.value.push(`New item`);
+    };
+
     return {
+      book,
       title,
       category,
       tags,
       categoryList,
       info,
       abstract,
+      bookList,
+      addItem,
     };
   },
 });

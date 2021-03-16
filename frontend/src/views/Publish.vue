@@ -1,7 +1,7 @@
 <template>
   <div class="publish-page">
     <Layout>
-      <div class="container">
+      <div class="container loading-in">
         <MarkdownHead ref="info" id="info" />
         <MarkdownCom ref="content" />
         <div class="operations">

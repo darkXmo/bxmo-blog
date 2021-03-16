@@ -7,6 +7,7 @@ import FriendLink from "@/models/FriendLink";
 import Article from "@/models/Article";
 import UserState from "@/models/UserState";
 import articleContent from "@/api/mock/articleContent";
+import abstract from "./abstract";
 
 const baseUrl = "http://127.0.0.1:3000/";
 
@@ -28,7 +29,7 @@ const articleItem = () => {
   const item: ArticleItem = {
     title: Random.ctitle(),
     author: Random.cname(),
-    abstract: Random.cparagraph(),
+    abstract: abstract(),
     date: new Date(Random.date()),
     tags: Array(Random.integer(1, 4))
       .fill(undefined)
@@ -65,7 +66,7 @@ const article = () => {
       .map(() => tag()),
     author: "Xmo",
     date: new Date(Random.date()),
-    abstract: Random.cparagraph(),
+    abstract: abstract(),
   };
   return item;
 };

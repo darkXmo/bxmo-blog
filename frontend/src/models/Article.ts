@@ -1,7 +1,9 @@
 import ArticleInfo from "./ArticleInfo";
+import Book from "./Book";
 
 interface Article extends ArticleInfo {
-  belong: Article | null;
+  id?: number;
+  belong: Book | null;
   content: string;
 }
 

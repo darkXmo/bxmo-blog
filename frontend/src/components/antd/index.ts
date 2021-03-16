@@ -8,6 +8,7 @@ import {
   Spin,
   Form,
   Alert,
+  Divider,
   Popconfirm,
 } from "ant-design-vue";
 import { App } from "vue";
@@ -27,6 +28,7 @@ const antdImport = (app: App<Element>) => {
   app.use(Alert);
   app.use(Popconfirm);
   app.use(Spin);
+  app.use(Divider);
 };
 
 export default antdImport;

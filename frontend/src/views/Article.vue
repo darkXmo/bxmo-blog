@@ -1,12 +1,8 @@
 <template>
   <div class="article-page">
-    <Layout :loaded="loaded">
-      <ArticleSidebarVue />
-      <ArticleContent
-        class="content loading-in"
-        :article="article"
-        v-if="loaded"
-      />
+    <Layout v-if="loaded" :loaded="loaded">
+      <ArticleSidebarVue :article="article" />
+      <ArticleContent class="content loading-in" :article="article" />
     </Layout>
   </div>
 </template>

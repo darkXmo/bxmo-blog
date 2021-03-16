@@ -4,7 +4,8 @@
 
 <style lang="scss">
 @import "./assets/style/markdown.scss";
-#app {
+body,
+html {
   font-family: Ubuntu, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
     Oxygen, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -42,17 +43,11 @@
 
   a {
     text-decoration: none;
-    color: $font-default-color;
   }
 
   .flex-align-center {
     display: flex;
     align-items: center;
-  }
-
-  ul {
-    list-style: none;
-    padding-left: 0;
   }
 
   h3 {
@@ -79,6 +74,11 @@
     }
   }
 
+  a {
+    font-weight: 500;
+    color: $font-default-color;
+  }
+
   .hover-underline {
     position: relative;
     &::after {
@@ -102,12 +102,14 @@
     }
   }
 }
-a {
-  font-weight: 500;
-}
 
 svg {
   color: $svg-default-color !important;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
 }
 
 .mode-fade-enter-active,

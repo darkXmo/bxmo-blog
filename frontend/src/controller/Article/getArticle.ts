@@ -16,3 +16,15 @@ export const getArticle = (
     });
   return article;
 };
+
+export const articleAnchorInit = () => {
+  const h2List: Array<HTMLHeadingElement> = Array.from(
+    document.getElementsByTagName("h2")
+  );
+  const h2ListHref: Array<string> = [];
+  h2List.forEach((element) => {
+    element.id = element.innerText;
+    h2ListHref.push(element.innerText);
+  });
+  return h2ListHref;
+};

@@ -1,23 +1,25 @@
+import { Random } from "mockjs";
+
 export default (): string => {
   return `
-## 介绍
+## ${Random.ctitle()}
 
-用 Vue3+Typescript 写一个博客
+${Random.csentence()}
 
-#### 软件架构
+#### ${Random.ctitle()}
 
-软件架构说明
+${Random.csentence()}
 
-##### 前端
+##### ${Random.ctitle()}
 
-> 1. 使用 UI： Ant-Design-Vue - 按需引入
-> 2. Vue-Router
-> 3. Vuex
-> 4. Typescript
-> 5. babel
-> 6. eslint - 仅使用了防止错误的推荐规范以及结尾必须加分号。
+> 1. ${Random.csentence()}
+> 2. ${Random.csentence()}
+> 3. ${Random.csentence()}
+> 4. ${Random.csentence()}
+> 5. ${Random.csentence()}
+> 6. ${Random.csentence()}
 
-##### commit 规范
+##### ${Random.ctitle()}
 
 依照[文章](https://juejin.cn/post/6845166890373873677)
 
@@ -27,128 +29,132 @@ export default (): string => {
 > 4. [commitizen](https://github.com/commitizen/cz-cli)
 > 5. [conventional-changelog](https://github.com/ajoslin/conventional-changelog)
 
-#### 安装教程
+#### ${Random.ctitle()}
 
 1. \`\`\`bash
-   cd frontend
+   cd ${Random.word()}
    \`\`\`
 
 2. \`\`\`bash
-   npm install
+   npm ${Random.word()}
    \`\`\`
 
-#### 使用说明
+#### ${Random.ctitle()}
 
 1. 热启动
 
    \`\`\`bash
-   npm run serve
+   npm run ${Random.word()}
    \`\`\`
 
-#### 部署说明
+#### ${Random.ctitle()}
 
-部署项目，你首先需要在机器上安装 \`docker\` 和 \`docker-compose \`。
+部署项目，你首先需要在机器上安装 \`${Random.word()}\` 和 \`${Random.word()}-compose \`。
 
-对于前端，你需要先进行构建发布
+${Random.cparagraph()}
 
 \`\`\`bash
 cd frontend
-npm run build
+npm ${Random.word()} ${Random.word()}
 cd ..
 \`\`\`
 
-本前端项目采用 Docker + Nginx 方式部署
+${Random.cparagraph()}
 
 \`\`\`bash
 cd deploy
 \`\`\`
 
-请检查 \`docker-compose.yml\` 文件，请将 volumes 设置成你的目录，以 \`bxmo-blog\` 为基准
+请检查 \`docker-${Random.word()}.yml\` 文件，请将 volumes 设置成你的目录，以 \`bxmo-blog\` 为基准
 
 \`\`\`yml
-version: "3"
+${Random.word()}n: "3"
 
-services:
+${Random.word()}s:
   nginx: #服务名称
-    image: nginx:latest
-    container_name: bxmo-blog-frontend
-    ports:
+  ${Random.word()}: nginx:latest
+    ${Random.word()}_${Random.word()}: bxmo-blog-${Random.word()}
+    ${Random.word()}:
       - 80:80
-    volumes: # 相对路径
+      ${Random.word()}: # 相对路径
       - ../frontend/dist:/usr/share/nginx/html
       - ./default.conf:/etc/nginx/conf.d/default.conf
-    privileged: true
+      ${Random.word()}: true
 \`\`\`
 
-然后，确保你在 \`bxmo-blog\` 目录。
+然后，确保你在 \`bxmo-blog\` 目录。${Random.cparagraph()}
+
+## ${Random.ctitle()}
 
 \`\`\`bash
-docker-compose up -d
+docker-${Random.word()} ${Random.word()} -d
 \`\`\`
 
-项目将在 \`localhost\` 或 \`localhost:80\` 地址上部署。
+项目将在 \`${Random.word()}\` 或 \`${Random.word()}:${Random.integer()}\` 地址上部署。${Random.cparagraph()}
 
-> 如果 docker-compose up -d 提示已有容器，则应当输入
+> ${Random.cparagraph()}
 >
 > \`\`\`bash
-> docker-compose up -d --force-recreate
+> docker-compose ${Random.word()} -d --${Random.word()}-${Random.word()}
 > \`\`\`
 >
 > 来进行构建
 
-如果你嫌麻烦，我也提供了一个脚本来帮助你进行构建部署前端，通过这种方式，可以直接在对应目录依次执行 \`npm run build\` + \`docker-compose up -d\`。
+${Random.cparagraph()}执行 \`npm run ${Random.word()}\` + \`${Random.word()}-${Random.word()} up -d\`。
 
 \`\`\`bash
-# /bxmo-blog
+# /bxmo-${Random.word()}
 cd ./deploy
-bash deploy.sh
+bash ${Random.word()}.sh
 \`\`\`
 
-##### 终止
+##### ${Random.ctitle()}
 
 \`\`\`bash
-docker container stop bxmo-blog-frontend
+${Random.word()} ${Random.word()} stop bxmo-blog-frontend
 \`\`\`
 
-##### 删除
+##### ${Random.ctitle()}
 
 \`\`\`bash
-docker container prune # 这个命令实际上会删除所有终止的容器
+docker ${Random.word()} ${Random.word()} # 这个命令实际上会删除所有终止的容器
 \`\`\`
 
-##### 进入容器
+##### ${Random.ctitle()}
 
 \`\`\`bash
-docker exec -it bxmo-blog-frontend bash
+docker exec -it ${Random.word()} bash
 \`\`\`
 
-### 自构建部署
+### ${Random.ctitle()}
 
-推荐使用我写的 Docker 镜像 - \`xmolan:ubuntu:0.1\` ，
+${Random.cparagraph()} - \`${Random.word()}:${Random.word()}:0.1\` ，
 
-构建执行 \`shell命令\` 。
+${Random.cparagraph()} \`${Random.word()}\` 。
+
+## ${Random.ctitle()}
 
 \`\`\`sh
 cd frontend
-npm install --production
-sudo npm run build
-sudo cp -af dist/. /var/www/html
+npm ${Random.word()} --production
+sudo npm run ${Random.word()}
+sudo cp -af dist/. /${Random.word()}/${Random.word()}/${Random.word()}
 \`\`\`
 
-### Git Commit 规范
+### ${Random.ctitle()}
 
-支持 Angular 的 Commit message 格式。
+${Random.cparagraph()} ${Random.word()} 的 Commit ${Random.word()} 格式。
 
-用 \`npm run commit\` 代替 \`git commit\` ，帮助输入规范化的 \`commit\` 内容。
+用 \`npm run ${Random.word()}\` 代替 \`${Random.word()} commit\` ，${Random.cword()}的 \`commit\` 内容。
 
 \`\`\`bash
-git add .
+git ${Random.word()} .
 npm run commit
 \`\`\`
 
-#### 生成 CHANGELOG
+#### ${Random.ctitle()}
 
 \`\`\`bash
-npm run changelog
+npm run ${Random.word()}
 \`\`\``;
 };
