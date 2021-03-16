@@ -30,14 +30,15 @@ $side-bar-ul-padding: 1.5rem 0;
   font-size: 16px;
   width: 20rem;
   position: fixed;
+  bottom: 0;
   z-index: 10;
   margin: 0;
   top: 4rem;
   left: 0;
-  bottom: 0;
   box-sizing: border-box;
   border-right: $border-default;
   overflow-y: auto;
+  overflow-x: hidden;
   background: rgb(237, 237, 237);
   background: linear-gradient(
     180deg,

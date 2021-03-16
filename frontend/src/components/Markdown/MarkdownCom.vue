@@ -1,7 +1,10 @@
 <template>
   <div class="markdown-com">
-    <a-textarea v-model:value="rawStr" v-on:keydown.tab="tab" id="textarea" />
-    <div class="markdowned-area" v-html="markdowned"></div>
+    <label for="textarea">内容</label>
+    <div class="content">
+      <a-textarea v-model:value="rawStr" v-on:keydown.tab="tab" id="textarea" />
+      <div class="markdowned-area" v-html="markdowned"></div>
+    </div>
   </div>
 </template>
 
@@ -36,13 +39,21 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .markdown-com {
-  display: grid;
-  height: 70vh;
-  grid-template-columns: 1fr 1fr;
-  border: $border-default;
-  background-color: #f7f7f7;
-  > * {
-    overflow: auto;
+  label {
+    white-space: nowrap;
+    margin: 0 1rem;
+    font-weight: bold;
+    float: left;
+  }
+  > div.content {
+    display: grid;
+    height: 70vh;
+    grid-template-columns: 1fr 1fr;
+    border: $border-default;
+    background-color: #f7f7f7;
+    > * {
+      overflow: auto;
+    }
   }
 }
 </style>

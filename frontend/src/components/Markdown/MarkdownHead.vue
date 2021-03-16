@@ -32,6 +32,10 @@
         id="tags"
       />
     </div>
+    <div class="abstract">
+      <label for="abstract">概述</label>
+      <a-textarea id="abstract" v-model:value="abstract"></a-textarea>
+    </div>
   </div>
 </template>
 
@@ -46,6 +50,7 @@ export default defineComponent({
     const title = ref<string>("");
     const category = ref<string>("前端");
     const tags = ref<string>("");
+    const abstract = ref<string>("");
 
     const categoryList: Array<string> = ["前端", "后端", "运维", "闲事", "AI"];
 
@@ -69,6 +74,9 @@ export default defineComponent({
           title: title.value,
           category: category.value,
           tags: tagsList.value,
+          date: new Date(),
+          author: "Xmo",
+          abstract: abstract.value,
         };
       }
     );
@@ -79,6 +87,7 @@ export default defineComponent({
       tags,
       categoryList,
       info,
+      abstract,
     };
   },
 });
@@ -101,6 +110,13 @@ export default defineComponent({
   > .attrs {
     display: flex;
     align-items: center;
+  }
+
+  > .abstract {
+    display: flex;
+    > #abstract {
+      height: 11vh;
+    }
   }
 }
 </style>

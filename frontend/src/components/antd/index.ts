@@ -5,6 +5,7 @@ import {
   Input,
   Select,
   Modal,
+  Spin,
   Form,
   Alert,
   Popconfirm,
@@ -25,6 +26,7 @@ const antdImport = (app: App<Element>) => {
   app.use(Form);
   app.use(Alert);
   app.use(Popconfirm);
+  app.use(Spin);
 };
 
 export default antdImport;

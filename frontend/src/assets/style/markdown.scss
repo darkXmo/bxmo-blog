@@ -93,6 +93,17 @@
     }
   }
 
+  blockquote {
+    padding: 0 1em;
+    color: #6a737d;
+    border-left: 0.25em solid #dfe2e5;
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 40px;
+    margin-inline-end: 40px;
+  }
+
   pre.hljs {
     padding: 8px 2px;
     border-radius: 5px;

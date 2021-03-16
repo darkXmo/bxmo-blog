@@ -109,4 +109,14 @@ a {
 svg {
   color: $svg-default-color !important;
 }
+
+.mode-fade-enter-active,
+.mode-fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.mode-fade-enter-from,
+.mode-fade-leave-to {
+  opacity: 0;
+}
 </style>

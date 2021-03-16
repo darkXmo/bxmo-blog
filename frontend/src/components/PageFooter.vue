@@ -37,6 +37,7 @@ export default defineComponent({
   justify-content: center;
   border-top: $border-default;
   padding: 1rem;
+  height: 71px;
 
   font-weight: 500;
 

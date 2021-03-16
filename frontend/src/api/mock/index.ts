@@ -63,6 +63,9 @@ const article = () => {
     tags: Array(Random.integer(1, 4))
       .fill(undefined)
       .map(() => tag()),
+    author: "Xmo",
+    date: new Date(Random.date()),
+    abstract: Random.cparagraph(),
   };
   return item;
 };
