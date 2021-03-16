@@ -1,7 +1,7 @@
 <template>
   <div class="article-page">
-    <Layout v-if="loaded" :loaded="loaded">
-      <ArticleSidebarVue :article="article" />
+    <Layout :loaded="loaded">
+      <ArticleSidebar class="loading-in" :article="article" />
       <ArticleContent class="content loading-in" :article="article" />
     </Layout>
   </div>
@@ -10,7 +10,7 @@
 <script lang="ts">
 import { computed, defineComponent, onMounted, ref } from "vue";
 import Layout from "@/layouts/index.vue";
-import ArticleSidebarVue from "./components/ArticleSidebar.vue";
+import ArticleSidebar from "./components/ArticleSidebar.vue";
 import { useRoute } from "vue-router";
 import { getArticle } from "@/controller/Article/getArticle";
 import Article from "@/models/Article";
@@ -19,7 +19,7 @@ export default defineComponent({
   name: "ArticlePage",
   components: {
     Layout,
-    ArticleSidebarVue,
+    ArticleSidebar,
     ArticleContent,
   },
   setup() {
@@ -32,6 +32,7 @@ export default defineComponent({
       }
     });
     const loaded = computed((): boolean => {
+      console.log(article.value);
       if (article.value) {
         return true;
       }

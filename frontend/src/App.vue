@@ -114,7 +114,7 @@ ul {
 
 .mode-fade-enter-active,
 .mode-fade-leave-active {
-  transition: opacity 0.5s ease;
+  transition: 0.5s ease;
 }
 
 .mode-fade-enter-from,
