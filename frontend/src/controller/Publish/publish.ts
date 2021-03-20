@@ -3,7 +3,7 @@ import ArticleInfo from "@/models/ArticleInfo";
 
 const publish = (info: ArticleInfo, content: string) => {
   const article: Article = Object.assign({ content }, info, {
-    belong: null,
+    book: null,
   });
   console.dir(article);
 };

@@ -80,7 +80,7 @@ import { TagsFilled } from "@ant-design/icons-vue";
 import { computed, defineComponent, PropType, ref } from "vue";
 import SiteInfo from "@/models/SiteInfo";
 import Category from "@/models/Category";
-import Tag from "@/models/Tag";
+import { Tag } from "@/models";
 import FriendLink from "@/models/FriendLink";
 
 import IconFont from "@/controller/utils/Icon";

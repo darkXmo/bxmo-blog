@@ -58,7 +58,7 @@
 
 <script lang="ts">
 import ArticleInfo from "@/models/ArticleInfo";
-import Tag from "@/models/Tag";
+import { Tag } from "@/models";
 import { computed, defineComponent, ref } from "vue";
 import NewBook from "./components/NewBook.vue";
 

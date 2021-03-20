@@ -1,5 +1,5 @@
 import ArticleItem from "@/models/ArticleItem";
-import Tag from "@/models/Tag";
+import { Tag } from "@/models";
 import Mock, { Random } from "mockjs";
 import API from "@/api";
 import Category from "@/models/Category";
@@ -57,7 +57,7 @@ const friendLink = () => {
 
 const article = () => {
   const item: Article = {
-    belong: null,
+    book: null,
     content: articleContent(),
     title: Random.ctitle(),
     category: Random.cword(),

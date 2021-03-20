@@ -4,6 +4,7 @@ import mock from "./mock";
 /**
  * 添加这一行就代表使用模拟数据
  */
+// const env = process.env.NODE_ENV;
 mock();
 
 /**

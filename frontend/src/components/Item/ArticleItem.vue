@@ -43,7 +43,7 @@
 import { computed, defineComponent, PropType } from "vue";
 
 import ArticleItem from "@/models/ArticleItem";
-import Tag from "@/models/Tag";
+import { Tag } from "@/models";
 import { TagsFilled } from "@ant-design/icons-vue";
 
 import Iconfont from "@/controller/utils/Icon";

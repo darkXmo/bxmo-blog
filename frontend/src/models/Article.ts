@@ -3,7 +3,7 @@ import Book from "./Book";
 
 interface Article extends ArticleInfo {
   id?: number;
-  belong: Book | null;
+  book: Book | null;
   content: string;
 }
 

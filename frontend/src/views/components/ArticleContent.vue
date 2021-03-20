@@ -41,7 +41,7 @@
 import Article from "@/models/Article";
 import { computed, defineComponent, PropType } from "vue";
 import transformMarkdown from "@/controller/Publish/transformMarkdown";
-import Tag from "@/models/Tag";
+import { Tag } from "@/models";
 
 import { TagsFilled } from "@ant-design/icons-vue";
 

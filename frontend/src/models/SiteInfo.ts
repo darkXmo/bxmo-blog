@@ -1,6 +1,6 @@
 import Category from "./Category";
 import FriendLink from "./FriendLink";
-import Tag from "./Tag";
+import { Tag } from "./";
 
 /**
  * 博客网站信息

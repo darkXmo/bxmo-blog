@@ -9,7 +9,7 @@
 
 <script lang="ts">
 import { randomColor } from "@/controller/utils/Random";
-import Tag from "@/models/Tag";
+import { Tag } from "@/models";
 import { defineComponent, PropType } from "vue";
 
 export default defineComponent({

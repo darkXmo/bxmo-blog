@@ -2,6 +2,28 @@
 node_modules
 dist
 
+logs/
+npm-debug.log
+node_modules/
+coverage/
+.idea/
+run/
+logs/
+.DS_Store
+.vscode
+*.swp
+*.lock
+*.js
+!.autod.conf.js
+
+app/**/*.js
+test/**/*.js
+config/**/*.js
+app/**/*.map
+test/**/*.map
+config/**/*.map
+
+
 # local env files
 .env.local
 .env.*.local
