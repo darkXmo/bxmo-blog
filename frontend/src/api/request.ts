@@ -11,7 +11,7 @@ mock();
  * 设置网站默认后端调用地址
  */
 const request = axios.create({
-  baseURL: "http://127.0.0.1:3000/",
+  baseURL: "http://127.0.0.1:7001/",
 });
 
 export default request;

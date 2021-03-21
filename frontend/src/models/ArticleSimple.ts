@@ -1,6 +1,6 @@
-import { Tag } from "./";
+import { Tag } from ".";
 
-interface ArticleItem {
+interface ArticleSimple {
   id?: number;
   title: string;
   abstract: string;
@@ -9,4 +9,4 @@ interface ArticleItem {
   tags: Array<Tag>;
 }
 
-export default ArticleItem;
+export default ArticleSimple;

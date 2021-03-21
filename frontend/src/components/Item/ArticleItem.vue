@@ -42,7 +42,7 @@
 <script lang="ts">
 import { computed, defineComponent, PropType } from "vue";
 
-import ArticleItem from "@/models/ArticleItem";
+import ArticleSimple from "@/models/ArticleSimple";
 import { Tag } from "@/models";
 import { TagsFilled } from "@ant-design/icons-vue";
 
@@ -54,10 +54,10 @@ import { getRandomInt } from "@/controller/utils/Random";
  * 文章项（由标题，概述和文章属性构成），该组件设置文章项的结构。
  */
 export default defineComponent({
-  name: "ArticleItem",
+  name: "ArticleSimple",
   props: {
     value: {
-      type: Object as PropType<ArticleItem>,
+      type: Object as PropType<ArticleSimple>,
       required: true,
     },
   },

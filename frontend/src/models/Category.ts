@@ -2,9 +2,9 @@
  * 分类
  */
 interface Category {
-  id?: number;
+  category_id?: number;
   value: string;
-  amount: number;
+  article_amount?: number;
 }
 
 export default Category;

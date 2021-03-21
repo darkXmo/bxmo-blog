@@ -7,6 +7,8 @@ export function isArticleSimple(object: any): object is ArticleSimple {
       'title' in object &&
       'abstract' in object &&
       'category' in object &&
+      'date' in object &&
+      'author' in object &&
       'book' in object &&
       'tags' in object;
   } catch (err) {

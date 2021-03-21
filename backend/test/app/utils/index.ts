@@ -1,22 +1,5 @@
 import { ArticleCompleted, ArticleSimple, ArticleToPublish } from 'model';
 
-export function isArticleCompleted(object: any): object is ArticleCompleted {
-  let ans = false;
-  try {
-    ans = 'id' in object &&
-      'content' in object &&
-      'title' in object &&
-      'abstract' in object &&
-      'category' in object &&
-      'book' in object &&
-      'tags' in object;
-  } catch (err) {
-    return false;
-  }
-  return ans;
-
-}
-
 export function isArticleSimple(object: any): object is ArticleSimple {
   let ans = false;
   try {
@@ -24,6 +7,8 @@ export function isArticleSimple(object: any): object is ArticleSimple {
       'title' in object &&
       'abstract' in object &&
       'category' in object &&
+      'publish_date' in object &&
+      'author' in object &&
       'book' in object &&
       'tags' in object;
   } catch (err) {
@@ -45,4 +30,24 @@ export function isArticleToPublish(object: any): object is ArticleToPublish {
     return false;
   }
   return ans;
+}
+
+export function isArticleCompleted(object: any): object is ArticleCompleted {
+  let ans = false;
+  try {
+    ans = 'id' in object &&
+      'author' in object &&
+      'publish_date' in object &&
+      'next_article' in object &&
+      'content' in object &&
+      'title' in object &&
+      'abstract' in object &&
+      'category' in object &&
+      'book' in object &&
+      'tags' in object;
+  } catch (err) {
+    return false;
+  }
+  return ans;
+
 }

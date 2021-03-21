@@ -28,7 +28,7 @@ export default class Article extends Service {
 
   public async getArticle(id: number): Promise<ArticleCompleted> {
     const mysql = this.app.mysql;
-    const article: ArticleSQL = (await mysql.query('SELECT title, abstract, content FROM article WHERE article_id = ?', [ id ]))[0];
+    const article: ArticleSQL = (await mysql.query('SELECT title, abstract, author, content, publish_date, next_article_id FROM article WHERE article_id = ?', [ id ]))[0];
     if (!article) {
       this.ctx.status = 404;
       throw new Error('Article Not Found');
@@ -36,12 +36,21 @@ export default class Article extends Service {
     const title: string = article.title;
     const abstract: string = article.abstract;
     const content: string = article.content ?? '';
+    const author: string = article.author;
+    const publish_date: Date = article.publish_date;
     const articleInfo: ArticleInfo = await this.getArticleInfo(id);
+    let next_article: null | ArticleSimple = null;
+    if (article.next_book_id) {
+      next_article = await this.getArticleSimple(article.next_book_id);
+    }
     return {
       id,
+      publish_date,
+      author,
       title,
       abstract,
       content,
+      next_article,
       category: articleInfo.category,
       book: articleInfo.book,
       tags: articleInfo.tags,
@@ -50,18 +59,22 @@ export default class Article extends Service {
 
   public async getArticleSimple(id: number): Promise<ArticleSimple> {
     const mysql = this.app.mysql;
-    const article: ArticleSQL = (await mysql.query('SELECT title, abstract FROM article WHERE article_id = ?', [ id ]))[0];
+    const article: ArticleSQL = (await mysql.query('SELECT title, abstract, author, publish_date FROM article WHERE article_id = ?', [ id ]))[0];
     if (!article) {
       this.ctx.status = 404;
       throw new Error('Article Not Found');
     }
     const title: string = article.title;
     const abstract: string = article.abstract;
+    const author: string = article.author;
+    const publish_date: Date = article.publish_date;
     const articleInfo: ArticleInfo = await this.getArticleInfo(id);
     return {
       id,
       title,
       abstract,
+      author,
+      publish_date,
       category: articleInfo.category,
       book: articleInfo.book,
       tags: articleInfo.tags,
@@ -125,7 +138,6 @@ export default class Article extends Service {
         this.ctx.response.status = 500;
         throw new Error('Article title duplicate');
       }
-
       const articleCategory = article.category;
       const categoryStored: Category = await this.publishCategory(articleCategory);
       const articleBook = article.book;
@@ -137,11 +149,14 @@ export default class Article extends Service {
         // 将这个标签加入数组
         tagsStored.push(tagStored);
       }
+      const author = article.author ?? null;
 
       // 将所有信息存入对应的Table中
       // 存入 article
       const { insertId } = await conn.insert('article', {
         title,
+        author,
+        publish_date: this.getTodayString(),
         content: article.content,
         abstract: article.abstract,
         category_id: categoryStored.category_id,
@@ -196,6 +211,7 @@ export default class Article extends Service {
         title?: string;
         abstract?: string;
         content?: string;
+        author?: string;
       } = {};
       if (body.title) {
         articleToUpdate.title = body.title;
@@ -205,6 +221,9 @@ export default class Article extends Service {
       }
       if (body.content) {
         articleToUpdate.content = body.content;
+      }
+      if (body.author) {
+        articleToUpdate.author = body.author;
       }
       await conn.update('article',
         articleToUpdate,
@@ -438,6 +457,14 @@ export default class Article extends Service {
       await conn.rollback(); // 一定记得捕获异常后回滚事务！！
       throw err;
     }
+  }
+
+  public getTodayString() {
+    const date = new Date();
+    const year = date.getFullYear().toString();
+    const month = date.getMonth().toString();
+    const day = date.getDate().toString();
+    return `${year}-${month}-${day}`;
   }
 
 

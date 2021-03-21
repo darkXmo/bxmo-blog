@@ -16,9 +16,12 @@ declare module 'model' {
   }
   interface ArticleCompleted extends ArticleSimple {
     content: string;
+    next_article: ArticleSimple | null;
   }
   interface ArticleSimple extends ArticleInfo{
     title: string;
+    author: string;
+    publish_date: Date;
     abstract: string;
   }
   interface ArticleInfo {
@@ -29,6 +32,7 @@ declare module 'model' {
   }
   interface ArticleToPublish {
     title: string;
+    author: string | null;
     abstract: string;
     content: string;
     category: string;
@@ -37,18 +41,21 @@ declare module 'model' {
   }
   interface ArticleToUpdate {
     id: number;
+    author?: string;
     title?: string;
     abstract?: string;
     content?: string;
   }
   interface ArticleSQL {
     article_id: number;
+    publish_date: Date;
     title: string;
+    author: string;
     abstract: string;
     content?: string;
     category_id: number;
     book_id: number;
-    next_book_id: number;
+    next_book_id?: number | null;
   }
 
   interface TagMapSQL {

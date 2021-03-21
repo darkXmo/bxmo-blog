@@ -58,6 +58,7 @@ describe('test/app/controller/article.test.ts', () => {
     const title = '我是一篇文章-' + new Date().getTime();
     const articleToPublish = ({
       title,
+      author: 'Xmo',
       abstract: '我是文章的概述Controller',
       content: '我是一篇文章，我很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长',
       category: '前端',

@@ -1,9 +1,7 @@
-import Article from "./Article";
-
 interface Book {
-  bookTitle: string;
-  id?: number;
-  articles: Array<Article>;
+  book_title: string;
+  book_id?: number;
+  book_amount?: number;
 }
 
 export default Book;

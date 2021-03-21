@@ -1,4 +1,4 @@
-import ArticleItem from "@/models/ArticleItem";
+import ArticleSimple from "@/models/ArticleSimple";
 import { Tag } from "@/models";
 import Mock, { Random } from "mockjs";
 import API from "@/api";
@@ -9,7 +9,7 @@ import UserState from "@/models/UserState";
 import articleContent from "@/api/mock/articleContent";
 import abstract from "./abstract";
 
-const baseUrl = "http://127.0.0.1:3000/";
+const baseUrl = "http://127.0.0.1:7001/";
 
 /**
  * 设置延时
@@ -26,7 +26,7 @@ const tag = () => {
 };
 
 const articleItem = () => {
-  const item: ArticleItem = {
+  const item: ArticleSimple = {
     title: Random.ctitle(),
     author: Random.cname(),
     abstract: abstract(),
@@ -40,8 +40,9 @@ const articleItem = () => {
 
 const category = () => {
   const item: Category = {
+    category_id: Random.integer(),
     value: Random.word(),
-    amount: Random.integer(1, 29),
+    article_amount: Random.integer(1, 29),
   };
 
   return item;

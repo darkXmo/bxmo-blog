@@ -1,7 +1,7 @@
-import ArticleItem from "./ArticleItem";
+import ArticleSimple from "./ArticleSimple";
 
 interface ArticleItemList {
-  value: Array<ArticleItem>;
+  value: Array<ArticleSimple>;
 }
 
 export default ArticleItemList;
