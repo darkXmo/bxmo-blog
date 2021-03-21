@@ -37,9 +37,9 @@ declare module 'model' {
   }
   interface ArticleToUpdate {
     id: number;
-    title: string;
-    abstract: string;
-    content: string;
+    title?: string;
+    abstract?: string;
+    content?: string;
   }
   interface ArticleSQL {
     article_id: number;
@@ -48,6 +48,7 @@ declare module 'model' {
     content?: string;
     category_id: number;
     book_id: number;
+    next_book_id: number;
   }
 
   interface TagMapSQL {

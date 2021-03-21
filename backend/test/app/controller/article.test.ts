@@ -1,9 +1,24 @@
 import * as assert from 'assert';
 import { app } from 'egg-mock/bootstrap';
-import { ArticleSimple, ArticleToUpdate } from 'model';
+import { ArticleSimple, ArticleToUpdate, LoginForm } from 'model';
 import { isArticleCompleted, isArticleSimple } from '../utils';
 
 describe('test/app/controller/article.test.ts', () => {
+  let token: string;
+
+  before(async () => {
+    const loginForm: LoginForm = {
+      username: 'Xmo',
+      password: 'ds',
+    };
+    const tokenObj = await app
+      .httpRequest()
+      .post('/login')
+      .type('form')
+      .send(loginForm);
+    token = JSON.parse(tokenObj.text).token;
+  });
+
   it('should GET /', async () => {
     const result = await app.httpRequest().get('/').expect(200);
     assert(result.text === 'hi, xmo');
@@ -53,6 +68,7 @@ describe('test/app/controller/article.test.ts', () => {
     const result = await app
       .httpRequest()
       .post('/article/publish')
+      .set('Authorization', `Bearer ${token}`)
       .type('form')
       .send(articleToPublish)
       .expect(200);
@@ -79,6 +95,7 @@ describe('test/app/controller/article.test.ts', () => {
       .httpRequest()
       .put(`/article/update/${articleStored.id}`)
       .type('form')
+      .set('Authorization', `Bearer ${token}`)
       .send(articleToUpdate)
       .expect(200);
     const resultArticle = JSON.parse(result.text);

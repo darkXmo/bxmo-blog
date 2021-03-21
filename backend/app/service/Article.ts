@@ -192,15 +192,28 @@ export default class Article extends Service {
   public async updateArticle(id: number, body: ArticleToUpdate): Promise<ArticleSimple> {
     const conn = await this.app.mysql.beginTransaction();
     try {
-      await conn.update('article', {
-        title: body.title,
-        abstract: body.abstract,
-        content: body.content,
-      }, {
-        where: {
-          article_id: id,
+      const articleToUpdate: {
+        title?: string;
+        abstract?: string;
+        content?: string;
+      } = {};
+      if (body.title) {
+        articleToUpdate.title = body.title;
+      }
+      if (body.abstract) {
+        articleToUpdate.abstract = body.abstract;
+      }
+      if (body.content) {
+        articleToUpdate.content = body.content;
+      }
+      await conn.update('article',
+        articleToUpdate,
+        {
+          where: {
+            article_id: id,
+          },
         },
-      });
+      );
       await conn.commit(); // 提交事务
       const ans = await this.getArticleSimple(id);
       return ans;
