@@ -15,7 +15,10 @@ export default class Article extends Service {
     const username = body.username;
     const password = createHmac('sha256', this.secret).update(body.password).digest('hex');
     const user = await this.getUser(username);
-    if (user.password === password && username === user.username) {
+    if (!user) {
+      return false;
+    }
+    if (user.password === password && user.username === username) {
       return true;
     }
     return false;
@@ -31,9 +34,6 @@ export default class Article extends Service {
   private async getUser(username: string) {
     const mysql = this.app.mysql;
     const ans = mysql.get('user', { username });
-    if (!ans) {
-      throw new Error('User Not Found');
-    }
     return ans;
   }
 

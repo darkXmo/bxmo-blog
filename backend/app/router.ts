@@ -5,7 +5,7 @@ export default (app: Application) => {
 
   router.post('/login', controller.auth.login);
 
-  router.post('/register', controller.auth.register);
+  router.post('/register', jwt, controller.auth.register);
 
   router.get('/', controller.article.index);
 
@@ -17,7 +17,7 @@ export default (app: Application) => {
 
   router.post('/article/publish', jwt, controller.article.publishArticle);
 
-  router.get('/article/delete/:id', controller.article.deleteArticle);
+  router.get('/article/delete/:id', jwt, controller.article.deleteArticle);
 
-  router.put('/article/update/:id', controller.article.updateArticle);
+  router.put('/article/update/:id', jwt, controller.article.updateArticle);
 };

@@ -13,7 +13,7 @@ export default class AuthController extends Controller {
       ctx.body = { token };
     } else {
       ctx.status = 403;
-      ctx.message = '账号或密码错误';
+      ctx.message = 'Login Failed';
     }
   }
 
