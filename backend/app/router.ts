@@ -1,19 +1,23 @@
 import { Application } from 'egg';
 
 export default (app: Application) => {
-  const { controller, router } = app;
+  const { controller, router, jwt } = app;
 
-  router.get('/', controller.home.index);
+  router.post('/login', controller.auth.login);
 
-  router.get('/article/list', controller.home.listArticles);
+  router.post('/register', controller.auth.register);
 
-  router.get('/article/:id', controller.home.getArticle);
+  router.get('/', controller.article.index);
 
-  router.get('/article/simple/:id', controller.home.getArticleSimple);
+  router.get('/article/list', controller.article.listArticles);
 
-  router.post('/article/publish', controller.home.publishArticle);
+  router.get('/article/:id', controller.article.getArticle);
 
-  router.get('/article/delete/:id', controller.home.deleteArticle);
+  router.get('/article/simple/:id', controller.article.getArticleSimple);
 
-  router.put('/article/update/:id', controller.home.updateArticle);
+  router.post('/article/publish', jwt, controller.article.publishArticle);
+
+  router.get('/article/delete/:id', controller.article.deleteArticle);
+
+  router.put('/article/update/:id', controller.article.updateArticle);
 };

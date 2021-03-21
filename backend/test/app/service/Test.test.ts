@@ -4,7 +4,7 @@ import { app } from 'egg-mock/bootstrap';
 import { ArticleToUpdate } from 'model';
 import { isArticleCompleted, isArticleSimple } from '../utils';
 
-describe('test/app/service/Article.article.js', () => {
+describe('test/app/service/Article.article.ts', () => {
   let ctx: Context;
   const bookTitle = '测试用书籍';
 
@@ -34,10 +34,10 @@ describe('test/app/service/Article.article.js', () => {
   });
 
   it('getArticleByTitle', async () => {
-    const result = await ctx.service.article.getArticleByTitle('ArticleTEst');
+    const result = await ctx.service.article.getArticleByTitle('测试文章标题');
     // 确保对象内容符合期望
     assert(isArticleSimple(result));
-    assert(result.title === 'ArticleTEst');
+    assert(result.title === '测试文章标题');
   });
 
   it('publishArticle', async () => {

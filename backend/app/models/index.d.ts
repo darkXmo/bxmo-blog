@@ -55,4 +55,9 @@ declare module 'model' {
     article_id: number;
     tag_id: number
   }
+
+  interface LoginForm {
+    username: string;
+    password: string;
+  }
 }

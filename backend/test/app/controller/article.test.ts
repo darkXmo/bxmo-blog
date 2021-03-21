@@ -3,7 +3,7 @@ import { app } from 'egg-mock/bootstrap';
 import { ArticleSimple, ArticleToUpdate } from 'model';
 import { isArticleCompleted, isArticleSimple } from '../utils';
 
-describe('test/app/controller/home.test.ts', () => {
+describe('test/app/controller/article.test.ts', () => {
   it('should GET /', async () => {
     const result = await app.httpRequest().get('/').expect(200);
     assert(result.text === 'hi, xmo');

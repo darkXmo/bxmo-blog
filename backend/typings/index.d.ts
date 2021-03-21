@@ -1,6 +1,9 @@
 import 'egg';
 
 declare module 'egg' {
+  interface Application {
+    jwt: any;
+  }
   interface MysqlExecuteResult {
     /** 影响行数 */
     affectedRows: number;

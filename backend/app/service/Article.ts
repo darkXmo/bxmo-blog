@@ -71,6 +71,9 @@ export default class Article extends Service {
   public async getArticleByTitle(title: string): Promise<ArticleSimple> {
     const mysql = this.app.mysql;
     const article: ArticleSQL = await mysql.get('article', { title });
+    if (!article) {
+      throw new Error('Article Not Found');
+    }
     const ans = await this.getArticleSimple(article.article_id);
     return ans;
   }
@@ -111,81 +114,100 @@ export default class Article extends Service {
   }
 
   public async publishArticle(article: ArticleToPublish): Promise<ArticleSimple> {
-    if (!isArticleToPublish(article)) {
-      this.ctx.response.status = 500;
-      throw new Error('Wrong Object');
-    }
-    const mysql = this.app.mysql;
-    const title = article.title;
-    if (await mysql.get('article', { title })) {
-      this.ctx.response.status = 500;
-      throw new Error('Article title duplicate');
-    }
+    const conn = await this.app.mysql.beginTransaction();
+    try {
+      if (!isArticleToPublish(article)) {
+        this.ctx.response.status = 500;
+        throw new Error('Wrong Object');
+      }
+      const title = article.title;
+      if (await conn.get('article', { title })) {
+        this.ctx.response.status = 500;
+        throw new Error('Article title duplicate');
+      }
 
-    const articleCategory = article.category;
-    const categoryStored: Category = await this.publishCategory(articleCategory);
-    const articleBook = article.book;
-    const bookStored: Book = await this.publishBook(articleBook);
-    const articleTags = article.tags;
-    const tagsStored: Array<Tag> = [];
-    for (const articleTag of articleTags) {
-      const tagStored = await this.publishTag(articleTag);
-      // 将这个标签加入数组
-      tagsStored.push(tagStored);
-    }
+      const articleCategory = article.category;
+      const categoryStored: Category = await this.publishCategory(articleCategory);
+      const articleBook = article.book;
+      const bookStored: Book = await this.publishBook(articleBook);
+      const articleTags = article.tags;
+      const tagsStored: Array<Tag> = [];
+      for (const articleTag of articleTags) {
+        const tagStored = await this.publishTag(articleTag);
+        // 将这个标签加入数组
+        tagsStored.push(tagStored);
+      }
 
-    // 将所有信息存入对应的Table中
-    // 存入 article
-    const { insertId } = await mysql.insert('article', {
-      title,
-      content: article.content,
-      abstract: article.abstract,
-      category_id: categoryStored.category_id,
-      book_id: bookStored.book_id,
-    });
-    // category和book不用存
-    // 在 tag_map 表中构建关系
-    for (const articleTag of tagsStored) {
-      await mysql.insert('tag_map', {
-        tag_id: articleTag.tag_id,
-        article_id: insertId,
+      // 将所有信息存入对应的Table中
+      // 存入 article
+      const { insertId } = await conn.insert('article', {
+        title,
+        content: article.content,
+        abstract: article.abstract,
+        category_id: categoryStored.category_id,
+        book_id: bookStored.book_id,
       });
+      // category和book不用存
+      // 在 tag_map 表中构建关系
+      for (const articleTag of tagsStored) {
+        await conn.insert('tag_map', {
+          tag_id: articleTag.tag_id,
+          article_id: insertId,
+        });
+      }
+      await conn.commit();
+      return await this.getArticleSimple(insertId);
+    } catch (err) {
+      await conn.rollback(); // 一定记得捕获异常后回滚事务！！
+      throw err;
     }
-    return await this.getArticleSimple(insertId);
   }
 
   public async deleteArticle(id: number): Promise<number> {
-    const mysql = this.app.mysql;
-    const articleStored: ArticleSQL = await mysql.get('article', { article_id: id });
-    await mysql.delete('article', { article_id: id });
-    await this.decreaseBook(articleStored.book_id);
-    await this.decreaseCategory(articleStored.category_id);
-    const articleTagMaps: Array<TagMapSQL> = await mysql.select('tag_map', {
-      where: {
-        article_id: id,
-      },
-      columns: [ 'tag_map_id', 'article_id', 'tag_id' ],
-    });
-    for (const element of articleTagMaps) {
-      const tag_map_id = element.tag_map_id;
-      await mysql.delete('tag_map', { tag_map_id });
-      await this.decreaseTag(element.tag_id);
+    const conn = await this.app.mysql.beginTransaction();
+    try {
+      const articleStored: ArticleSQL = await conn.get('article', { article_id: id });
+      await conn.delete('article', { article_id: id });
+      await this.decreaseBook(articleStored.book_id);
+      await this.decreaseCategory(articleStored.category_id);
+      const articleTagMaps: Array<TagMapSQL> = await conn.select('tag_map', {
+        where: {
+          article_id: id,
+        },
+        columns: [ 'tag_map_id', 'article_id', 'tag_id' ],
+      });
+      for (const element of articleTagMaps) {
+        const tag_map_id = element.tag_map_id;
+        await conn.delete('tag_map', { tag_map_id });
+        await this.decreaseTag(element.tag_id);
+      }
+      await conn.commit();
+      return id;
+    } catch (err) {
+      await conn.rollback(); // 一定记得捕获异常后回滚事务！！
+      throw err;
     }
-    return id;
   }
 
   public async updateArticle(id: number, body: ArticleToUpdate): Promise<ArticleSimple> {
-    const mysql = this.app.mysql;
-    await mysql.update('article', {
-      title: body.title,
-      abstract: body.abstract,
-      content: body.content,
-    }, {
-      where: {
-        article_id: id,
-      },
-    });
-    return await this.getArticleSimple(id);
+    const conn = await this.app.mysql.beginTransaction();
+    try {
+      await conn.update('article', {
+        title: body.title,
+        abstract: body.abstract,
+        content: body.content,
+      }, {
+        where: {
+          article_id: id,
+        },
+      });
+      await conn.commit(); // 提交事务
+      const ans = await this.getArticleSimple(id);
+      return ans;
+    } catch (err) {
+      await conn.rollback(); // 一定记得捕获异常后回滚事务！！
+      throw err;
+    }
   }
 
   /**
@@ -228,23 +250,32 @@ export default class Article extends Service {
    * @param tagName Tag名
    */
   private async publishTag(tagName: string): Promise<Tag> {
-    const mysql = this.app.mysql;
-    const tableName = 'tag';
-    const tagStored: Tag = await mysql.get(tableName, { value: tagName });
-    if (!tagStored) {
-      await mysql.insert(tableName, { value: tagName, article_amount: 1 });
-      return await mysql.get(tableName, { value: tagName });
+    const conn = await this.app.mysql.beginTransaction();
+    try {
+      let ans: Tag;
+      const tableName = 'tag';
+      const tagStored: Tag = await conn.get(tableName, { value: tagName });
+      if (!tagStored) {
+        await conn.insert(tableName, { value: tagName, article_amount: 1 });
+        ans = await conn.get(tableName, { value: tagName });
+      } else {
+        const row = {
+          article_amount: tagStored.article_amount + 1,
+        };
+        const options = {
+          where: {
+            tag_id: tagStored.tag_id,
+          },
+        };
+        await conn.update(tableName, row, options);
+        ans = await conn.get(tableName, { tag_id: tagStored.tag_id });
+      }
+      await conn.commit();
+      return ans;
+    } catch (err) {
+      await conn.rollback(); // 一定记得捕获异常后回滚事务！！
+      throw err;
     }
-    const row = {
-      article_amount: tagStored.article_amount + 1,
-    };
-    const options = {
-      where: {
-        tag_id: tagStored.tag_id,
-      },
-    };
-    await mysql.update(tableName, row, options);
-    return await mysql.get(tableName, { tag_id: tagStored.tag_id });
   }
 
   /**
@@ -252,22 +283,31 @@ export default class Article extends Service {
    * @param categoryName Category名
    */
   private async publishCategory(categoryName: string): Promise<Category> {
-    const mysql = this.app.mysql;
-    const categoryStored: Category = await mysql.get('category', { value: categoryName });
-    if (!categoryStored) {
-      await mysql.insert('category', { value: categoryName, article_amount: 1 });
-      return await mysql.get('category', { value: categoryName });
+    const conn = await this.app.mysql.beginTransaction();
+    try {
+      const categoryStored: Category = await conn.get('category', { value: categoryName });
+      let ans: Category;
+      if (!categoryStored) {
+        await conn.insert('category', { value: categoryName, article_amount: 1 });
+        ans = await conn.get('category', { value: categoryName });
+      } else {
+        const row = {
+          article_amount: categoryStored.article_amount + 1,
+        };
+        const options = {
+          where: {
+            category_id: categoryStored.category_id,
+          },
+        };
+        await conn.update('category', row, options);
+        ans = await conn.get('category', { category_id: categoryStored.category_id });
+      }
+      await conn.commit();
+      return ans;
+    } catch (err) {
+      await conn.rollback(); // 一定记得捕获异常后回滚事务！！
+      throw err;
     }
-    const row = {
-      article_amount: categoryStored.article_amount + 1,
-    };
-    const options = {
-      where: {
-        category_id: categoryStored.category_id,
-      },
-    };
-    await mysql.update('category', row, options);
-    return await mysql.get('category', { category_id: categoryStored.category_id });
   }
 
   /**
@@ -275,89 +315,116 @@ export default class Article extends Service {
    * @param bookTitle 书目标题
    */
   private async publishBook(bookTitle: string): Promise<Book> {
-    const mysql = this.app.mysql;
-    const tableName = 'book';
-    const bookStored: Book = await mysql.get(tableName, { book_title: bookTitle });
-    if (!bookStored) {
-      await mysql.insert(tableName, { book_title: bookTitle, article_amount: 1 });
-      return await mysql.get(tableName, { book_title: bookTitle });
+    const conn = await this.app.mysql.beginTransaction();
+    try {
+      let ans: Book;
+      const tableName = 'book';
+      const bookStored: Book = await conn.get(tableName, { book_title: bookTitle });
+      if (!bookStored) {
+        await conn.insert(tableName, { book_title: bookTitle, article_amount: 1 });
+        ans = await conn.get(tableName, { book_title: bookTitle });
+      } else {
+        const row = {
+          article_amount: bookStored.article_amount + 1,
+        };
+        const options = {
+          where: {
+            book_id: bookStored.book_id,
+          },
+        };
+        await conn.update(tableName, row, options);
+        ans = await conn.get(tableName, { book_id: bookStored.book_id });
+      }
+      await conn.commit();
+      return ans;
+    } catch (err) {
+      await conn.rollback(); // 一定记得捕获异常后回滚事务！！
+      throw err;
     }
-    const row = {
-      article_amount: bookStored.article_amount + 1,
-    };
-    const options = {
-      where: {
-        book_id: bookStored.book_id,
-      },
-    };
-    await mysql.update(tableName, row, options);
-    return await mysql.get(tableName, { book_id: bookStored.book_id });
   }
 
   private async decreaseTag(id: number): Promise<void> {
-    const mysql = this.app.mysql;
-    const tableName = 'tag';
-    const tagStored: Tag = await mysql.get(tableName, { tag_id: id });
-    if (!tagStored) {
-      return;
+    const conn = await this.app.mysql.beginTransaction();
+    try {
+      const tableName = 'tag';
+      const tagStored: Tag = await conn.get(tableName, { tag_id: id });
+      if (!tagStored) {
+        throw new Error('Tag Not Found');
+      }
+      if (tagStored.article_amount === 1) {
+        await conn.delete(tableName, { tag_id: id });
+      } else {
+        const row = {
+          article_amount: tagStored.article_amount - 1,
+        };
+        const options = {
+          where: {
+            tag_id: id,
+          },
+        };
+        await conn.update(tableName, row, options);
+      }
+      await conn.commit();
+    } catch (err) {
+      await conn.rollback(); // 一定记得捕获异常后回滚事务！！
+      throw err;
     }
-    if (tagStored.article_amount === 1) {
-      mysql.delete(tableName, { tag_id: id });
-      return;
-    }
-    const row = {
-      article_amount: tagStored.article_amount - 1,
-    };
-    const options = {
-      where: {
-        tag_id: id,
-      },
-    };
-    mysql.update(tableName, row, options);
   }
 
   private async decreaseCategory(id: number): Promise<void> {
-    const mysql = this.app.mysql;
-    const tableName = 'category';
-    const categoryStored: Category = await mysql.get(tableName, { category_id: id });
-    if (!categoryStored) {
-      return;
+    const conn = await this.app.mysql.beginTransaction();
+    try {
+      const tableName = 'category';
+      const categoryStored: Category = await conn.get(tableName, { category_id: id });
+      if (!categoryStored) {
+        throw new Error('Category Not Found');
+      }
+      if (categoryStored.article_amount === 1) {
+        await conn.delete(tableName, { category_id: id });
+      } else {
+        const row = {
+          article_amount: categoryStored.article_amount - 1,
+        };
+        const options = {
+          where: {
+            category_id: id,
+          },
+        };
+        await conn.update(tableName, row, options);
+      }
+      await conn.commit();
+    } catch (err) {
+      await conn.rollback(); // 一定记得捕获异常后回滚事务！！
+      throw err;
     }
-    if (categoryStored.article_amount === 1) {
-      mysql.delete(tableName, { category_id: id });
-      return;
-    }
-    const row = {
-      article_amount: categoryStored.article_amount - 1,
-    };
-    const options = {
-      where: {
-        category_id: id,
-      },
-    };
-    mysql.update(tableName, row, options);
   }
 
   private async decreaseBook(id: number): Promise<void> {
-    const mysql = this.app.mysql;
-    const tableName = 'book';
-    const bookStored: Book = await mysql.get(tableName, { book_id: id });
-    if (!bookStored) {
-      return;
+    const conn = await this.app.mysql.beginTransaction();
+    try {
+      const tableName = 'book';
+      const bookStored: Book = await conn.get(tableName, { book_id: id });
+      if (!bookStored) {
+        throw new Error('Book Not Found');
+      }
+      if (bookStored.article_amount === 1) {
+        await conn.delete(tableName, { book_id: id });
+      } else {
+        const row = {
+          article_amount: bookStored.article_amount - 1,
+        };
+        const options = {
+          where: {
+            book_id: id,
+          },
+        };
+        await conn.update(tableName, row, options);
+      }
+      await conn.commit();
+    } catch (err) {
+      await conn.rollback(); // 一定记得捕获异常后回滚事务！！
+      throw err;
     }
-    if (bookStored.article_amount === 1) {
-      mysql.delete(tableName, { book_id: id });
-      return;
-    }
-    const row = {
-      article_amount: bookStored.article_amount - 1,
-    };
-    const options = {
-      where: {
-        book_id: id,
-      },
-    };
-    mysql.update(tableName, row, options);
   }
 
 
