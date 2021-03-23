@@ -8,8 +8,11 @@ import Article from "@/models/Article";
 import UserState from "@/models/UserState";
 import articleContent from "@/api/mock/articleContent";
 import abstract from "./abstract";
+import SiteInfo from "@/models/SiteInfo";
 
 const baseUrl = "http://127.0.0.1:7001/";
+// eslint-disable-next-line no-useless-escape
+const baseUrlReg = "/http:\\/\\/127\\.0\\.0\\.1:7001";
 
 /**
  * 设置延时
@@ -25,12 +28,13 @@ const tag = () => {
   return tag;
 };
 
-const articleItem = () => {
+const articleSimple = () => {
   const item: ArticleSimple = {
     title: Random.ctitle(),
     author: Random.cname(),
     abstract: abstract(),
-    date: new Date(Random.date()),
+    book: null,
+    publish_date: Random.date(),
     tags: Array(Random.integer(1, 4))
       .fill(undefined)
       .map(() => tag()),
@@ -50,6 +54,7 @@ const category = () => {
 
 const friendLink = () => {
   const item: FriendLink = {
+    link_id: Random.integer(),
     value: Random.url(),
     name: Random.word(),
   };
@@ -61,12 +66,12 @@ const article = () => {
     book: null,
     content: articleContent(),
     title: Random.ctitle(),
-    category: Random.cword(),
+    category: category(),
     tags: Array(Random.integer(1, 4))
       .fill(undefined)
       .map(() => tag()),
     author: "Xmo",
-    date: new Date(Random.date()),
+    publish_date: Random.date(),
     abstract: abstract(),
   };
   return item;
@@ -88,27 +93,30 @@ export default () => {
   Mock.mock(baseUrl + API.GET_ARTICLE_LIST, {
     articles: Array(10)
       .fill(undefined)
-      .map(() => articleItem()),
+      .map(() => articleSimple()),
   });
 
-  Mock.mock(baseUrl + API.GET_SITE_INFO, {
+  const siteInfo: SiteInfo = {
     owner: "Xmo",
-    articleAmount: Random.integer(10, 99),
-    tagAmount: Random.integer(10, 99),
+    article_amount: Random.integer(10, 99),
     categories: Array(Random.integer(3, 10))
       .fill(undefined)
       .map(() => category()),
     tags: Array(Random.integer(10, 20))
       .fill(undefined)
       .map(() => tag()),
-    friendLinks: Array(Random.integer(2, 3))
+    friend_links: Array(Random.integer(2, 3))
       .fill(undefined)
       .map(() => friendLink()),
-  });
+  };
+
+  Mock.mock(baseUrl + API.GET_SITE_INFO, siteInfo);
 
   Mock.mock(baseUrl + API.POST_LOGIN, userInfo());
 
-  Mock.mock(baseUrl + API.GET_ARTICLE, article());
+  // eslint-disable-next-line no-useless-escape
+  const getArticleReg = "\\/article\\/\\d+/";
+  Mock.mock(eval(baseUrlReg + getArticleReg), article());
 };
 
 // 输出结果

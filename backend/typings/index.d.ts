@@ -62,6 +62,7 @@ declare module 'egg' {
       }
     ): Promise<Array<any>>;
 
+
     /**
      * 执行sql语句
      *
@@ -78,6 +79,11 @@ declare module 'egg' {
       sql: String,
       values?: Array<any>
     ): Promise<Array<any> | MysqlExecuteResult>;
+
+    count(
+      tableName: string,
+      where?: Record<string, any>
+    ): Promise<number>;
 
     /* 增删改部分 */
 

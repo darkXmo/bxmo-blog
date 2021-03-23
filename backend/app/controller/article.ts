@@ -21,6 +21,16 @@ export default class ArticleController extends Controller {
     }
   }
 
+  public async getArticlesByBook() {
+    const { ctx } = this;
+    try {
+      ctx.body = await ctx.service.article.getArticlesByBook(ctx.params.id);
+    } catch (err) {
+      ctx.status = 500;
+      ctx.message = err.message;
+    }
+  }
+
   public async getArticleSimple() {
     const { ctx } = this;
     try {

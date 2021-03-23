@@ -1,11 +1,11 @@
 import axios from "axios";
-import mock from "./mock";
+// import mock from "./mock";
 
 /**
  * 添加这一行就代表使用模拟数据
  */
 // const env = process.env.NODE_ENV;
-mock();
+// mock();
 
 /**
  * 设置网站默认后端调用地址

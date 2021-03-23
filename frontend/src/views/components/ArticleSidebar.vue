@@ -3,11 +3,13 @@
     <ul class="sidebar-links">
       <li>
         <section class="sidebar-group">
-          <p class="siderbar-heading">书名</p>
+          <p class="siderbar-heading">{{ articleTitle }}</p>
           <ul class="sidebar-links sidebar-group-items">
-            <li>
-              <a :href="path + '#'" class="sidebar-link">{{ title }}</a>
-              <ul class="sidebar-sub-headers">
+            <li v-for="article in bookArticles" :key="article.id">
+              <a :href="'/article/' + article.id + '#'" class="sidebar-link">{{
+                article.title
+              }}</a>
+              <ul class="sidebar-sub-headers" v-if="article.id == id">
                 <li
                   class="sidebar-sub-header"
                   v-for="item in sidebarLinks"
@@ -38,6 +40,7 @@ import {
 import { articleAnchorInit } from "@/controller/Article/getArticle";
 import { useRoute } from "vue-router";
 import Article from "@/models/Article";
+import ArticleSimple from "@/models/ArticleSimple";
 
 export default defineComponent({
   name: "ArticleSidebar",
@@ -46,12 +49,18 @@ export default defineComponent({
       type: Object as PropType<Article>,
       required: true,
     },
+    bookArticles: {
+      type: Object as PropType<Array<ArticleSimple>>,
+      required: true,
+    },
   },
   setup(props) {
     const sidebarLinks = ref<Array<string>>([]);
     const route = useRoute();
     const path = route.path;
     onMounted(() => {
+      console.log(props.bookArticles);
+      console.log(route);
       nextTick(() => {
         sidebarLinks.value = articleAnchorInit();
       });
@@ -59,10 +68,18 @@ export default defineComponent({
     const title = computed((): string => {
       return props.article.title;
     });
+    const id = computed((): number => {
+      return props.article.id ?? 0;
+    });
+    const articleTitle = computed((): string => {
+      return props.article.book?.book_title ?? "";
+    });
     return {
+      id,
       path,
       sidebarLinks,
       title,
+      articleTitle,
     };
   },
 });

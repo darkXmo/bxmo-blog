@@ -91,17 +91,13 @@ export default class Article extends Service {
     return ans;
   }
 
-  public async getArticleByBook(bookTitle: string): Promise<Array<{
+  public async getArticlesByBook(id: number): Promise<Array<{
     title: string;
     id: number;
     book: Book
   }>> {
     const mysql = this.app.mysql;
-    const book: Book = await mysql.get('book', { book_title: bookTitle });
-    if (!book) {
-      return [];
-    }
-    const bookId = book.book_id;
+    const bookId = id;
     const articlesIds: Array<number> = (await mysql.select('article', {
       where: {
         book_id: bookId,
@@ -126,8 +122,26 @@ export default class Article extends Service {
     return ans;
   }
 
+  public async getArticlesByBookTitle(bookTitle: string): Promise<Array<{
+    title: string;
+    id: number;
+    book: Book
+  }>> {
+    const mysql = this.app.mysql;
+    const book: Book = await mysql.get('book', { book_title: bookTitle });
+    if (!book) {
+      return [];
+    }
+    const ans = await this.getArticlesByBook(book.book_id);
+    return ans;
+  }
+
   public async publishArticle(article: ArticleToPublish): Promise<ArticleSimple> {
     const conn = await this.app.mysql.beginTransaction();
+    if (article.title.trim().length === 0 || article.content.trim().length === 0) {
+      this.ctx.response.status = 409;
+      throw new Error('Title or Content Empty');
+    }
     try {
       if (!isArticleToPublish(article)) {
         this.ctx.response.status = 500;

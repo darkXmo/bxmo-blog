@@ -4,7 +4,7 @@
     <span
       class="category-amount"
       :style="`background-color: ${randomColor(70, 45, 0.8)}`"
-      >{{ item.amount }}</span
+      >{{ item.article_amount }}</span
     >
   </div>
 </template>

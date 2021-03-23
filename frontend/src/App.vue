@@ -101,10 +101,17 @@ html {
       }
     }
   }
-}
 
-svg {
-  color: $svg-default-color !important;
+  .fix-button {
+    position: fixed;
+    bottom: 4rem;
+    right: 5rem;
+    display: flex;
+    flex-direction: column;
+    > *:first-child {
+      margin-bottom: 0.5rem;
+    }
+  }
 }
 
 ul {

@@ -40,7 +40,12 @@ export default defineComponent({
     const rules: Rules = {
       username: [
         { required: true, message: "Please input username", trigger: "blur" },
-        { min: 3, max: 5, message: "Length should be 3 to 5", trigger: "blur" },
+        {
+          min: 3,
+          max: 12,
+          message: "Length should be 3 to 12",
+          trigger: "blur",
+        },
       ],
       password: [
         { required: true, message: "Please input password", trigger: "change" },

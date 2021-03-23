@@ -11,9 +11,17 @@ export const getters: GetterTree<UserState, RootState> = {
    * @returns
    */
   logined(state): boolean {
-    if (state.token.length > 10) {
+    if (state.token) {
+      return true;
+    }
+    if (window.localStorage.getItem("bxmo-token")) {
+      state.token = window.localStorage.getItem("bxmo-token");
       return true;
     }
     return false;
+  },
+
+  token(state): string | null {
+    return state.token;
   },
 };

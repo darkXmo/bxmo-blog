@@ -1,9 +1,6 @@
-import { loginReq } from "@/api/loginReq";
 import LoginForm from "@/models/LoginForm";
-import UserState from "@/models/UserState";
 import { RootState } from "@/store/types";
 import { userMutationsType as mutationsType } from "@/store/types";
-import { AxiosResponse } from "axios";
 import { Store } from "vuex";
 
 /**
@@ -12,14 +9,7 @@ import { Store } from "vuex";
  * @param loginForm 登录表单
  */
 export const login = (store: Store<RootState>, loginForm: LoginForm): void => {
-  loginReq(loginForm)
-    .then((res: AxiosResponse<UserState>) => {
-      store.commit("user/" + mutationsType.SAVE_USER_INFO, res.data);
-      console.log(store.state);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  store.dispatch("user/login", loginForm);
 };
 
 export const logout = (store: Store<RootState>): void => {

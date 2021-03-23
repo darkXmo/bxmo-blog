@@ -2,7 +2,7 @@
   <div class="article-list">
     <ul>
       <li v-for="item in articles" :key="item.title">
-        <ArticleSimple :value="item" />
+        <ArticleItem :value="item" />
       </li>
     </ul>
   </div>
@@ -12,7 +12,7 @@
 import { computed, defineComponent, PropType } from "vue";
 
 import ArticleItemList from "@/models/ArticleItemList";
-import ArticleSimple from "../Item/ArticleSimple.vue";
+import ArticleItem from "../Item/ArticleItem.vue";
 
 /**
  * 文章项（由标题，概述和文章属性构成）的列表，用在首页。
@@ -35,7 +35,7 @@ export default defineComponent({
     };
   },
   components: {
-    ArticleSimple,
+    ArticleItem,
   },
 });
 </script>

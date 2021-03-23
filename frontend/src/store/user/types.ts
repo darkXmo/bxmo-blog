@@ -2,7 +2,7 @@
 
 export interface UserState {
   username: string;
-  token: string;
+  token: string | null;
 }
 
 export const mutationsType: Record<string, string> = {

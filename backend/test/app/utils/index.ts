@@ -1,4 +1,4 @@
-import { ArticleCompleted, ArticleSimple, ArticleToPublish } from 'model';
+import { ArticleCompleted, ArticleSimple, ArticleToPublish, SiteInfo } from 'model';
 
 export function isArticleSimple(object: any): object is ArticleSimple {
   let ans = false;
@@ -45,6 +45,25 @@ export function isArticleCompleted(object: any): object is ArticleCompleted {
       'category' in object &&
       'book' in object &&
       'tags' in object;
+  } catch (err) {
+    return false;
+  }
+  return ans;
+
+}
+
+
+export function isSiteInfo(object: any): object is SiteInfo {
+  let ans = false;
+  try {
+    ans = 'categories' in object &&
+      'books' in object &&
+      'tags' in object &&
+      'owner' in object &&
+      'article_amount' in object &&
+      'tag_id' in object.tags[0] &&
+      'book_id' in object.books[0] &&
+      'category_id' in object.categories[0];
   } catch (err) {
     return false;
   }

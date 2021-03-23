@@ -3,6 +3,7 @@
     <div class="title">
       <label for="title">标题</label>
       <a-input
+        autocomplete="off"
         v-model:value="title"
         placeholder="博文标题"
         size="large"
@@ -10,12 +11,20 @@
       />
     </div>
     <div class="attrs">
+      <label for="author">作者</label>
+      <a-input
+        autocomplete="off"
+        v-model:value="author"
+        style="width: 22vw"
+        placeholder="作者名"
+        id="author"
+      />
       <label for="category">分类</label>
       <a-select
         v-model:value="category"
         placeholder="点击选择分类"
         id="category"
-        style="width: 20vw"
+        style="width: 22vw"
         ref="categorySelect"
       >
         <a-select-option
@@ -30,7 +39,7 @@
         v-model:value="book"
         placeholder="点击选择 书目"
         id="book"
-        style="width: 20vw"
+        style="width: 22vw"
         ref="bookSelect"
       >
         <template #dropdownRender="{ menuNode: menu }">
@@ -44,6 +53,7 @@
       </a-select>
       <label for="tags">标签</label>
       <a-input
+        autocomplete="off"
         v-model:value="tags"
         placeholder="博文标签，用 | 分割，例如 'vue|react'"
         id="tags"
@@ -58,9 +68,12 @@
 
 <script lang="ts">
 import ArticleInfo from "@/models/ArticleInfo";
-import { Tag } from "@/models";
 import { computed, defineComponent, ref } from "vue";
 import NewBook from "./components/NewBook.vue";
+import { Store, useStore } from "vuex";
+import { RootState } from "@/store/types";
+import { siteMutationsType } from "@/store/types";
+import { getTodayString } from "@/controller/utils/date";
 
 export default defineComponent({
   name: "MarkdownHead",
@@ -74,6 +87,14 @@ export default defineComponent({
     const title = ref<string>("");
     const tags = ref<string>("");
     const abstract = ref<string>("");
+    const author = ref<string>("");
+
+    const store: Store<RootState> = useStore();
+    store.dispatch("site/fetchData");
+
+    // const categoryList = computed((): Array<string> => {
+    //   return store.state.site?.categories.map(value => value.value) ?? [];
+    // });
 
     const categoryList = ref<Array<string>>([
       "前端",
@@ -82,26 +103,25 @@ export default defineComponent({
       "闲事",
       "AI",
     ]);
-    const bookList = ref<Array<string>>([
-      "Vue3",
-      "typescript",
-      "ES+",
-      "css",
-      "日记",
-    ]);
+
+    const bookList = computed(
+      (): Array<string> => {
+        return store.state.site?.books?.map((value) => value.book_title) ?? [];
+      }
+    );
 
     const book = ref<string>(bookList.value[0]);
     const category = ref<string>(categoryList.value[0]);
 
     const tagsList = computed(
-      (): Array<Tag> => {
+      (): Array<string> => {
         const ans = tags.value
           .split("|")
           .filter((value) => {
             return value !== "";
           })
           .map((value) => {
-            return { value: value.trim() };
+            return value.trim();
           });
         return ans;
       }
@@ -113,20 +133,22 @@ export default defineComponent({
           title: title.value,
           category: category.value,
           tags: tagsList.value,
-          date: new Date(),
+          publish_date: getTodayString(),
           author: "Xmo",
+          book: book.value,
           abstract: abstract.value,
         };
       }
     );
 
     const addItem = (newBook: string) => {
-      bookList.value.push(newBook);
+      store.commit("site/" + siteMutationsType.CREATE_BOOK, newBook);
     };
 
     return {
       book,
       title,
+      author,
       category,
       tags,
       categoryList,

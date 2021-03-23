@@ -10,6 +10,7 @@ export const initArticles = () => {
   const homeArticles: ArticleItemList = reactive({ value: [] });
   articleListReq
     .then((res) => {
+      console.log(res);
       homeArticles.value = res.data.articles;
     })
     .catch((err) => {
@@ -25,29 +26,26 @@ export const initArticles = () => {
 export const initSiteInfo = () => {
   const siteInfo: SiteInfo = reactive({
     owner: "",
-    articleAmount: 0,
-    tagAmount: 0,
+    article_amount: 0,
     categories: [],
     tags: [],
-    friendLinks: [],
+    friend_links: [],
   });
   siteInfoReq
     .then((res) => {
       const {
         owner,
-        articleAmount,
-        tagAmount,
+        article_amount,
         categories,
         tags,
-        friendLinks,
+        friend_links,
       } = res.data;
 
       siteInfo.owner = owner;
-      siteInfo.articleAmount = articleAmount;
-      siteInfo.tagAmount = tagAmount;
+      siteInfo.article_amount = article_amount;
       siteInfo.categories = categories;
       siteInfo.tags = tags;
-      siteInfo.friendLinks = friendLinks;
+      siteInfo.friend_links = friend_links;
     })
     .catch((err) => {
       window.console.log(err);

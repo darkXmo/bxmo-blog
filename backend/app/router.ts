@@ -9,7 +9,11 @@ export default (app: Application) => {
 
   router.get('/', controller.article.index);
 
+  router.get('/siteinfo', controller.site.getSiteInfo);
+
   router.get('/article/list', controller.article.listArticles);
+
+  router.get('/article/book/:id', controller.article.getArticlesByBook);
 
   router.get('/article/:id', controller.article.getArticle);
 

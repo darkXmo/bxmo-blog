@@ -1,11 +1,10 @@
-import { Tag } from "./index";
-
 interface ArticleInfo {
   title: string;
+  book: string;
   category: string;
-  tags: Array<Tag>;
+  tags: Array<string>;
   author: string;
-  date: Date;
+  publish_date: string;
   abstract: string;
 }
 

@@ -44,6 +44,7 @@ describe('test/app/service/Article.article.ts', () => {
     const title = '我是一篇文章-' + new Date().getTime();
     const result = await ctx.service.article.publishArticle({
       title,
+      author: 'Xmo',
       abstract: '我是文章的概述',
       content: '我是一篇文章，我很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长',
       category: '后端',
@@ -55,8 +56,8 @@ describe('test/app/service/Article.article.ts', () => {
     assert(title === articleStored.title && title === result.title);
   });
 
-  it('getArticleByBook', async () => {
-    const result = await ctx.service.article.getArticleByBook(bookTitle);
+  it('getArticlesByBookTitle', async () => {
+    const result = await ctx.service.article.getArticlesByBookTitle(bookTitle);
     assert(result[0].book.book_title === bookTitle);
   });
 
@@ -82,12 +83,12 @@ describe('test/app/service/Article.article.ts', () => {
    * 最后一个执行，顺便将之前所有生成的文章都删掉
    */
   it('deleteArticle', async () => {
-    const result = await ctx.service.article.getArticleByBook(bookTitle);
+    const result = await ctx.service.article.getArticlesByBookTitle(bookTitle);
     for (const item of result) {
       const deletedArticleId = await ctx.service.article.deleteArticle(item.id);
       assert(deletedArticleId === item.id);
     }
-    const articleLeft = await ctx.service.article.getArticleByBook(bookTitle);
+    const articleLeft = await ctx.service.article.getArticlesByBookTitle(bookTitle);
     assert(articleLeft.length === 0);
   });
 });

@@ -25,7 +25,7 @@
       <div class="fix-button">
         <LoginModal v-if="!logined" />
         <LogoutConfirm v-else />
-        <GoPublish />
+        <GoPublish v-if="logined" />
       </div>
     </Layout>
   </div>
@@ -117,17 +117,6 @@ export default defineComponent({
       flex: 0 0 300px;
 
       padding: $page-content-padding;
-    }
-  }
-
-  .fix-button {
-    position: fixed;
-    bottom: 4rem;
-    right: 5rem;
-    display: flex;
-    flex-direction: column;
-    > *:first-child {
-      margin-bottom: 0.5rem;
     }
   }
 }

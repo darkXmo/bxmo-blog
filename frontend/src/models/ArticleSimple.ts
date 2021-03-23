@@ -1,11 +1,13 @@
 import { Tag } from ".";
+import Book from "./Book";
 
 interface ArticleSimple {
   id?: number;
   title: string;
   abstract: string;
   author: string;
-  date: Date;
+  book: Book | null;
+  publish_date: string;
   tags: Array<Tag>;
 }
 

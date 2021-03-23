@@ -50,12 +50,11 @@ export default defineComponent({
         })
         .catch((error: ValidateErrorEntity<LoginFormModal>) => {
           console.warn("error", error);
+        })
+        .finally(() => {
+          visible.value = false;
+          confirmLoading.value = false;
         });
-
-      setTimeout(() => {
-        visible.value = false;
-        confirmLoading.value = false;
-      }, 3000);
     };
     return {
       loginForm,

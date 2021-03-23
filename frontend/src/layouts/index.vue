@@ -59,3 +59,8 @@ export default defineComponent({
   }
 }
 </style>
+<style lang="scss">
+.page-layout svg {
+  color: $svg-default-color;
+}
+</style>

@@ -14,6 +14,23 @@ declare module 'model' {
     value: string;
     article_amount: number;
   }
+  interface CategoryCollection {
+    categories: Array<Category>;
+  }
+  interface BookCollection {
+    books: Array<Book>;
+  }
+  interface TagCollection {
+    tags: Array<Tag>;
+  }
+  interface SiteInfo {
+    tags: Array<tag>,
+    books: Array<Book>;
+    categories: Array<Category>;
+    article_amount: number;
+    owner: string;
+    friend_links: Array<any>;
+  }
   interface ArticleCompleted extends ArticleSimple {
     content: string;
     next_article: ArticleSimple | null;

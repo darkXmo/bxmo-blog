@@ -48,13 +48,12 @@ import { TagsFilled } from "@ant-design/icons-vue";
 
 import Iconfont from "@/controller/utils/Icon";
 import { Router, useRouter } from "vue-router";
-import { getRandomInt } from "@/controller/utils/Random";
 
 /**
  * 文章项（由标题，概述和文章属性构成），该组件设置文章项的结构。
  */
 export default defineComponent({
-  name: "ArticleSimple",
+  name: "ArticleItem",
   props: {
     value: {
       type: Object as PropType<ArticleSimple>,
@@ -69,7 +68,7 @@ export default defineComponent({
       return props.value.abstract;
     });
     const date = computed((): string => {
-      return props.value.date.toString().substring(0, 10);
+      return props.value.publish_date.substring(0, 10);
     });
     const author = computed((): string => {
       return props.value.author;
@@ -79,13 +78,16 @@ export default defineComponent({
         return props.value.tags;
       }
     );
+    const id = computed((): number => {
+      return props.value.id ?? 0;
+    });
 
     const router: Router = useRouter();
     const goCheck = () => {
       router.push({
         name: "Article",
         params: {
-          id: getRandomInt(),
+          id: id.value,
         },
       });
     };

@@ -109,11 +109,11 @@ export default defineComponent({
     });
 
     const articleAmount = computed((): number => {
-      return props.siteInfo.articleAmount;
+      return props.siteInfo.article_amount;
     });
 
     const tagAmount = computed((): number => {
-      return props.siteInfo.tagAmount;
+      return props.siteInfo.tags.length ?? 0;
     });
 
     const categories = computed(
@@ -130,7 +130,7 @@ export default defineComponent({
 
     const friendLinks = computed(
       (): Array<FriendLink> => {
-        return props.siteInfo.friendLinks;
+        return props.siteInfo.friend_links;
       }
     );
 

@@ -16,11 +16,15 @@ export const mutations: MutationTree<UserState> = {
    * @param userState 更新后的用户状态
    */
   [mutationsType.SAVE_USER_INFO](state, userState: UserState) {
+    if (userState.token) {
+      window.localStorage.setItem("bxmo-token", userState.token);
+    }
     state = Object.assign(state, userState);
   },
 
   // eslint-disable-next-line
   [mutationsType.CLEAR_USER_INFO](state) {
+    window.localStorage.removeItem("bxmo-token");
     state = Object.assign(state, emptyState);
   },
 };
