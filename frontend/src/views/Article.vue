@@ -8,10 +8,10 @@
       />
       <ArticleContent class="content loading-in" :article="article" />
     </Layout>
-    <div class="fix-button">
+    <div class="fix-button loading-in" v-if="loaded">
       <LoginModal v-if="!logined" />
       <LogoutConfirm v-else />
-      <GoPublish v-if="logined" />
+      <DeleteArticleModal v-if="logined" :article="article" />
     </div>
   </div>
 </template>
@@ -26,10 +26,10 @@ import Article from "@/models/Article";
 import ArticleContent from "./components/ArticleContent.vue";
 import ArticleSimple from "@/models/ArticleSimple";
 import LoginModal from "@/components/Modal/LoginModal.vue";
-import GoPublish from "@/components/Button/GoPublish.vue";
 import LogoutConfirm from "@/components/Confirm/LogoutConfirm.vue";
 import { Store, useStore } from "vuex";
 import { RootState } from "@/store/types";
+import DeleteArticleModal from "@/components/Modal/DeleteArticleModal.vue";
 
 export default defineComponent({
   name: "ArticlePage",
@@ -39,7 +39,7 @@ export default defineComponent({
     ArticleContent,
     LogoutConfirm,
     LoginModal,
-    GoPublish,
+    DeleteArticleModal,
   },
   setup() {
     const route = useRoute();

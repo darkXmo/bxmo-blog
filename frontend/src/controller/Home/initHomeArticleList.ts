@@ -6,9 +6,10 @@ import { reactive } from "vue";
 /**
  * 返回首页文章列表
  */
-export const initArticles = () => {
+export const initArticles = async () => {
   const homeArticles: ArticleItemList = reactive({ value: [] });
-  articleListReq
+  console.log("init");
+  await articleListReq
     .then((res) => {
       console.log(res);
       homeArticles.value = res.data.articles;

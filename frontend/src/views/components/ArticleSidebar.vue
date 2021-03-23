@@ -59,8 +59,6 @@ export default defineComponent({
     const route = useRoute();
     const path = route.path;
     onMounted(() => {
-      console.log(props.bookArticles);
-      console.log(route);
       nextTick(() => {
         sidebarLinks.value = articleAnchorInit();
       });

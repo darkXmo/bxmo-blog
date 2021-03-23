@@ -26,3 +26,9 @@ export const articlePublishReq = (
   token: string
 ): Promise<AxiosResponse<ArticleSimple>> =>
   request.post(api.PUBLISH, body, authorizationConfig(token));
+
+export const deleteArticleReq = (
+  id: number,
+  token: string
+): Promise<AxiosResponse<number>> =>
+  request.get(`${api.DELETE_ARTICLE}/${id}`, authorizationConfig(token));

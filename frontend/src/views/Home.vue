@@ -35,7 +35,7 @@
 // 引入Vue组件或vue模块
 import Hero from "@/components/Hero.vue";
 import ArticleList from "@/components/List/ArticleList.vue";
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent, reactive } from "vue";
 import Layout from "@/layouts/index.vue";
 import Pagination from "@/components/Pagination.vue";
 import LoginModal from "@/components/Modal/LoginModal.vue";
@@ -71,7 +71,10 @@ export default defineComponent({
     GoPublish,
   },
   setup() {
-    const homeArticles: ArticleItemList = initArticles();
+    const homeArticles: ArticleItemList = reactive({ value: [] });
+    initArticles().then((res) => {
+      homeArticles.value = res.value;
+    });
     const siteInfo: SiteInfo = initSiteInfo();
     const ifHomeAritlces = computed((): boolean => {
       return homeArticles.value.length > 0;

@@ -117,6 +117,10 @@ export default () => {
   // eslint-disable-next-line no-useless-escape
   const getArticleReg = "\\/article\\/\\d+/";
   Mock.mock(eval(baseUrlReg + getArticleReg), article());
+
+  Mock.mock(baseUrl + API.PUBLISH, articleSimple());
+
+  Mock.mock(baseUrl + API.DELETE_ARTICLE, Random.integer());
 };
 
 // 输出结果

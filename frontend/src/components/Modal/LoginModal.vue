@@ -42,7 +42,6 @@ export default defineComponent({
     const handleSubmit = (): void => {
       confirmLoading.value = true;
       const form: LoginFormComponent = loginForm.value;
-      console.log(form);
       form
         .onSubmit()
         .then(() => {

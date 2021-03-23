@@ -12,6 +12,7 @@ const api: {
   GET_ARTICLE: "article",
   GET_BOOK_ARTICLES: "article/book",
   PUBLISH: "article/publish",
+  DELETE_ARTICLE: "article/delete",
 };
 
 export default api;
