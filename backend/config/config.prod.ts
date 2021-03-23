@@ -6,7 +6,7 @@ export default () => {
   config.cluster = {
     https: {
       key: path.join(__dirname, './5370296_bxmoback.top.key'), // https 证书绝对目录
-      cert: path.join(__dirname, './5370296_bxmoback.top.crt'), // https 证书绝对目录
+      cert: path.join(__dirname, './5370296_bxmoback.top.pem'), // https 证书绝对目录
     },
   };
   const mysql = {
