@@ -8,7 +8,7 @@ export default () => {
       // host
       host: '192.168.91.129',
       // 端口号
-      port: '13306',
+      port: '3306',
       // 用户名
       user: 'xmo',
       // 密码
