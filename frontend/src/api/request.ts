@@ -4,14 +4,18 @@ import axios from "axios";
 /**
  * 添加这一行就代表使用模拟数据
  */
-// const env = process.env.NODE_ENV;
+const env = process.env.NODE_ENV;
 // mock();
+let baseURL = "http://127.0.0.1:7001/";
+if (env === "production") {
+  baseURL = "https://bxmo.top:17001/";
+}
 
 /**
  * 设置网站默认后端调用地址
  */
 const request = axios.create({
-  baseURL: "http://127.0.0.1:7001/",
+  baseURL,
 });
 
 export default request;
