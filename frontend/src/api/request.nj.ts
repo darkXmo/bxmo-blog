@@ -8,7 +8,7 @@ const env = process.env.NODE_ENV;
 // mock();
 let baseURL = "http://192.168.91.129:7001/";
 if (env === "production") {
-  baseURL = "http://bxmo.top:17001/";
+  baseURL = "http://47.102.192.194/:17001/";
 }
 
 /**
