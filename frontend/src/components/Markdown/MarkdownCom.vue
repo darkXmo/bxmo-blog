@@ -18,7 +18,8 @@ import tabEvent from "@/controller/Publish/keyEvent";
 export default defineComponent({
   name: "MarkdownCom",
   setup() {
-    const rawStr = ref<string>("");
+    const storage = window.localStorage.getItem("article_content");
+    const rawStr = ref<string>(storage ? storage : "");
     const markdowned = computed(() => {
       return transformMarkdown(rawStr.value);
     });
