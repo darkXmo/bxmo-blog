@@ -29,7 +29,9 @@ const publish = (
           message.error(`发表博文失败，失败信息：未授权 || 未登录`);
         } else {
           message.error(
-            `发表博文失败，失败信息：${err.response.data ?? err.message ?? err}`
+            `发表博文失败，失败信息：${
+              err.response?.data ?? err.response?.message ?? err.message ?? err
+            }`
           );
         }
       })

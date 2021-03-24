@@ -11,7 +11,7 @@ export const deleteArticle = async (id: number, store: Store<RootState>) => {
         message.success(`删除文章 ID${res.data}`);
       })
       .catch((err) => {
-        message.error(`${err.response.message ?? err.message ?? err}`);
+        message.error(`${err.response?.message ?? err.message ?? err}`);
       });
   } else {
     message.error("未登录，禁止删除文章");
