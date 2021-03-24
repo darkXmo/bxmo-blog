@@ -1,6 +1,7 @@
 import { articleGetReq, bookArticlesGetReq } from "@/api/articleReq";
 import Article from "@/models/Article";
 import ArticleSimple from "@/models/ArticleSimple";
+import { message } from "ant-design-vue";
 import { Ref } from "vue";
 import { getDateString } from "../utils/date";
 
@@ -38,7 +39,7 @@ export const getArticle = (
       getBookArticles(bookArticles, data.book?.book_id ?? 0);
     })
     .catch((err) => {
-      console.error(err);
+      message.error(err.response?.message ?? err.message ?? err, 0);
     });
   return article;
 };

@@ -7,9 +7,9 @@ import axios from "axios";
 const env = process.env.NODE_ENV;
 // mock();
 let baseURL = "http://192.168.91.129:7001/";
-// if (env === "production") {
-baseURL = "https://bxmoback.top/";
-// }
+if (env === "production") {
+  baseURL = "https://bxmoback.top/";
+}
 
 /**
  * 设置网站默认后端调用地址
