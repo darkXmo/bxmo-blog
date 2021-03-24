@@ -1,6 +1,7 @@
 import { articleListReq, siteInfoReq } from "@/api/homeReq";
 import ArticleItemList from "@/models/ArticleItemList";
 import SiteInfo from "@/models/SiteInfo";
+import { message, notification } from "ant-design-vue";
 import { reactive } from "vue";
 import { getDateString } from "../utils/date";
 
@@ -9,7 +10,6 @@ import { getDateString } from "../utils/date";
  */
 export const initArticles = async () => {
   const homeArticles: ArticleItemList = reactive({ value: [] });
-  console.log("init");
   await articleListReq
     .then((res) => {
       const ans = res.data.articles;
@@ -19,7 +19,20 @@ export const initArticles = async () => {
       homeArticles.value = res.data.articles;
     })
     .catch((err) => {
-      window.console.log(err);
+      if (err.message === "Network Error") {
+        notification.open({
+          message: "网络错误",
+          description:
+            "加载后端失败，网络错误。由于网站部署在香港，如遇到本提示，请使用代理访问。",
+          onClick: () => {
+            console.log("Notification Clicked!");
+          },
+        });
+      }
+      message.error(err.response?.message ?? err.message ?? err);
+    })
+    .finally(() => {
+      // console.log(loading);
     });
 
   return homeArticles;

@@ -35,7 +35,7 @@
 // 引入Vue组件或vue模块
 import Hero from "@/components/Hero.vue";
 import ArticleList from "@/components/List/ArticleList.vue";
-import { computed, defineComponent, reactive } from "vue";
+import { computed, defineComponent, onMounted, reactive } from "vue";
 import Layout from "@/layouts/index.vue";
 import Pagination from "@/components/Pagination.vue";
 import LoginModal from "@/components/Modal/LoginModal.vue";
@@ -54,6 +54,8 @@ import {
 import SiteInfomation from "@/components/SiteInfomation.vue";
 import { Store, useStore } from "vuex";
 import { RootState } from "@/store/types";
+import { message } from "ant-design-vue";
+import { MessageType } from "node_modules/ant-design-vue/lib/message";
 
 /**
  * 首页
@@ -72,8 +74,16 @@ export default defineComponent({
   },
   setup() {
     const homeArticles: ArticleItemList = reactive({ value: [] });
+    let loading: MessageType;
+    onMounted(() => {
+      loading = message.loading(
+        "正在加载数据，如果未使用代理访问本网站，可能加载失败",
+        0
+      );
+    });
     initArticles().then((res) => {
       homeArticles.value = res.value;
+      if (loading) loading();
     });
     const siteInfo: SiteInfo = initSiteInfo();
     const ifHomeAritlces = computed((): boolean => {
