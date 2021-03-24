@@ -28,15 +28,16 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, onMounted, ref } from "vue";
 import Layout from "@/layouts/index.vue";
 import MarkdownCom from "@/components/Markdown/MarkdownCom.vue";
 import MarkdownHead from "@/components/Markdown/MarkdownHead.vue";
 import publish from "@/controller/Publish/publish";
 import ArticleInfo from "@/models/ArticleInfo";
 
-import { useRouter } from "vue-router";
+import { onBeforeRouteLeave, useRouter } from "vue-router";
 import { useStore } from "vuex";
+import { message } from "ant-design-vue";
 
 export default defineComponent({
   name: "PublishPage",
@@ -55,6 +56,34 @@ export default defineComponent({
       const articleContent: string = content.value.rawStr;
       publish(articleInfo, articleContent, router, store);
     };
+
+    const saveContent = (e: KeyboardEvent) => {
+      if (e.key === "s" && e.ctrlKey === true) {
+        e.preventDefault();
+        window.localStorage.setItem("article_content", content.value.rawStr);
+        window.localStorage.setItem(
+          "article_info",
+          JSON.stringify({
+            title: info.value.title,
+            author: info.value.author,
+            category: info.value.category,
+            tags: info.value.tags,
+            book: info.value.book,
+            abstract: info.value.abstract,
+          })
+        );
+        message.info("已保存");
+      }
+    };
+
+    onMounted(() => {
+      document.addEventListener("keydown", saveContent);
+    });
+
+    onBeforeRouteLeave(() => {
+      document.removeEventListener("keydown", saveContent);
+    });
+
     const cancel = () => {
       router.back();
     };

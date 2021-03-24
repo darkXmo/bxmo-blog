@@ -84,10 +84,16 @@ export default defineComponent({
     },
   },
   setup() {
-    const title = ref<string>("");
-    const tags = ref<string>("");
-    const abstract = ref<string>("");
-    const author = ref<string>("");
+    let storage;
+    try {
+      storage = JSON.parse(window.localStorage.getItem("article_info") ?? "");
+    } catch (__) {
+      storage = null;
+    }
+    const title = ref<string>(storage?.title ?? "");
+    const tags = ref<string>(storage?.tags ?? "");
+    const abstract = ref<string>(storage?.abstract ?? "");
+    const author = ref<string>(storage?.author ?? "");
 
     const store: Store<RootState> = useStore();
     store.dispatch("site/fetchData");

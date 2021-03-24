@@ -68,7 +68,7 @@ export default defineComponent({
       return props.value.abstract;
     });
     const date = computed((): string => {
-      return props.value.publish_date.substring(0, 10);
+      return props.value.publish_date;
     });
     const author = computed((): string => {
       return props.value.author;

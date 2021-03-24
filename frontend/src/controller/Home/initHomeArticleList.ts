@@ -2,6 +2,7 @@ import { articleListReq, siteInfoReq } from "@/api/homeReq";
 import ArticleItemList from "@/models/ArticleItemList";
 import SiteInfo from "@/models/SiteInfo";
 import { reactive } from "vue";
+import { getDateString } from "../utils/date";
 
 /**
  * 返回首页文章列表
@@ -11,7 +12,10 @@ export const initArticles = async () => {
   console.log("init");
   await articleListReq
     .then((res) => {
-      console.log(res);
+      const ans = res.data.articles;
+      ans.forEach((ele) => {
+        ele.publish_date = getDateString(ele.publish_date);
+      });
       homeArticles.value = res.data.articles;
     })
     .catch((err) => {

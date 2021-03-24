@@ -2,6 +2,7 @@ import { articleGetReq, bookArticlesGetReq } from "@/api/articleReq";
 import Article from "@/models/Article";
 import ArticleSimple from "@/models/ArticleSimple";
 import { Ref } from "vue";
+import { getDateString } from "../utils/date";
 
 /**
  * 通过书目的id获取所有的书
@@ -33,6 +34,7 @@ export const getArticle = (
     .then((res) => {
       const data: Article = res.data;
       article.value = data;
+      article.value.publish_date = getDateString(article.value.publish_date);
       getBookArticles(bookArticles, data.book?.book_id ?? 0);
     })
     .catch((err) => {

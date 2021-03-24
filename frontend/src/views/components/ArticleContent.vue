@@ -70,7 +70,7 @@ export default defineComponent({
       return props.article.author;
     });
     const date = computed((): string => {
-      return props.article.publish_date.toString().substring(0, 10);
+      return props.article.publish_date.toString();
     });
     const tags = computed(
       (): Array<Tag> => {

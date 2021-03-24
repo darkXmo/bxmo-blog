@@ -32,6 +32,10 @@ const publish = (
             `发表博文失败，失败信息：${err.response.data ?? err.message ?? err}`
           );
         }
+      })
+      .finally(() => {
+        window.localStorage.removeItem("article_info");
+        window.localStorage.removeItem("article_content");
       });
   } else {
     message.error(`发表博文失败，失败信息：未授权 || 未登录`);
