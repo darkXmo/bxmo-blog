@@ -1,5 +1,5 @@
 <template>
-  <a-button class="go-login" shape="circle" size="large">
+  <a-button class="go-login" shape="circle" size="large" title="登录">
     <LoginOutlined />
   </a-button>
 </template>

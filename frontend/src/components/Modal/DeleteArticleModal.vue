@@ -1,14 +1,6 @@
 <template>
   <div class="delete-article-modal">
-    <a-button
-      class="go-login"
-      shape="circle"
-      size="large"
-      type="danger"
-      @click="showModal"
-    >
-      <DeleteOutlined />
-    </a-button>
+    <GoDelete @click="showModal" />
     <a-modal
       title="删除该页博文"
       v-model:visible="visible"
@@ -28,6 +20,7 @@ import { defineComponent, PropType, ref } from "vue";
 import { deleteArticle } from "@/controller/Article/deleteArticle";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
+import GoDelete from "../Button/GoDelete.vue";
 
 export default defineComponent({
   name: "DeleteArticleModal",
@@ -38,6 +31,7 @@ export default defineComponent({
     },
   },
   components: {
+    GoDelete,
     DeleteOutlined,
   },
   setup(props) {

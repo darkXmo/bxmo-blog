@@ -3,7 +3,7 @@ import api from "./index";
 import { AxiosResponse } from "axios";
 import Article from "@/models/Article";
 import ArticleSimple from "@/models/ArticleSimple";
-import { ArticleToPublish } from "@/models";
+import { ArticleToModify, ArticleToPublish } from "@/models";
 
 const authorizationConfig = (token: string) => {
   return {
@@ -32,3 +32,10 @@ export const deleteArticleReq = (
   token: string
 ): Promise<AxiosResponse<number>> =>
   request.get(`${api.DELETE_ARTICLE}/${id}`, authorizationConfig(token));
+
+export const updateArticleReq = (
+  id: number,
+  body: ArticleToModify,
+  token: string
+): Promise<AxiosResponse<ArticleSimple>> =>
+  request.put(`${api.UPDATE_ARTICLE}/${id}`, body, authorizationConfig(token));

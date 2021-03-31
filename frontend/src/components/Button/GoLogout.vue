@@ -1,5 +1,5 @@
 <template>
-  <a-button class="go-logout" shape="circle" size="large">
+  <a-button class="go-logout" shape="circle" size="large" title="登出">
     <LogoutOutlined />
   </a-button>
 </template>

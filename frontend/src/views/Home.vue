@@ -55,7 +55,7 @@ import SiteInfomation from "@/components/SiteInfomation.vue";
 import { Store, useStore } from "vuex";
 import { RootState } from "@/store/types";
 import { message } from "ant-design-vue";
-import { MessageType } from "node_modules/ant-design-vue/lib/message";
+import { MessageType } from "ant-design-vue/lib/message";
 
 /**
  * 首页

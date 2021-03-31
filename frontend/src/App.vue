@@ -108,8 +108,8 @@ html {
     right: 5rem;
     display: flex;
     flex-direction: column;
-    > *:first-child {
-      margin-bottom: 0.5rem;
+    > *:not(:first-child) {
+      margin-top: 0.5rem;
     }
   }
 }

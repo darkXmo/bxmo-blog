@@ -6,7 +6,7 @@ import axios from "axios";
  */
 const env = process.env.NODE_ENV;
 // mock();
-let baseURL = "http://192.168.91.129:7001/";
+let baseURL = "http://127.0.0.1:7002/";
 if (env === "production") {
   baseURL = "https://bxmoback.top/";
 }

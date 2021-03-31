@@ -64,10 +64,18 @@ export default class ArticleController extends Controller {
   public async updateArticle() {
     const { ctx } = this;
     try {
-      ctx.body = await ctx.service.article.updateArticle(ctx.params.id, ctx.request.body);
+      ctx.body = await ctx.service.article.updateArticle(
+        ctx.params.id,
+        ctx.request.body,
+      );
     } catch (err) {
       ctx.status = 500;
-      ctx.message = err.message;
+      console.dir(err);
+      if (err.sqlMessage && err.code === 'ER_DUP_ENTRY') {
+        ctx.message = 'Duplicate Title';
+      } else {
+        ctx.message = err.message;
+      }
     }
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="markdown-head">
+  <div class="markdown-mod-head">
     <div class="title">
       <label for="title">标题</label>
       <a-input
@@ -22,6 +22,7 @@
       <label for="category">分类</label>
       <a-select
         v-model:value="category"
+        :disabled="true"
         placeholder="点击选择分类"
         id="category"
         style="width: 22vw"
@@ -38,15 +39,11 @@
       <a-select
         v-model:value="book"
         placeholder="点击选择 书目"
+        :disabled="true"
         id="book"
         style="width: 22vw"
         ref="bookSelect"
       >
-        <template #dropdownRender="{ menuNode: menu }">
-          <v-nodes :vnodes="menu" />
-          <a-divider style="margin: 4px 0" />
-          <NewBook @confirm="addItem" />
-        </template>
         <a-select-option v-for="item in bookList" :value="item" :key="item">{{
           item
         }}</a-select-option>
@@ -54,6 +51,7 @@
       <label for="tags">标签</label>
       <a-input
         autocomplete="off"
+        :disabled="true"
         v-model:value="tags"
         placeholder="博文标签，用 | 分割，例如 'vue|react'"
         id="tags"
@@ -68,39 +66,30 @@
 
 <script lang="ts">
 import ArticleInfo from "@/models/ArticleInfo";
-import { computed, defineComponent, ref } from "vue";
-import NewBook from "./components/NewBook.vue";
+import { computed, defineComponent, PropType, ref } from "vue";
 import { Store, useStore } from "vuex";
 import { RootState } from "@/store/types";
-import { siteMutationsType } from "@/store/types";
 import { getTodayString } from "@/controller/utils/date";
+import Article from "@/models/Article";
 
 export default defineComponent({
-  name: "MarkdownHead",
-  components: {
-    NewBook,
-    VNodes: (_, { attrs }) => {
-      return attrs.vnodes;
+  name: "MarkdownModHead",
+  props: {
+    article: {
+      required: true,
+      type: Object as PropType<Article>,
     },
   },
-  setup() {
-    let storage;
-    try {
-      storage = JSON.parse(window.localStorage.getItem("article_info") ?? "");
-    } catch (__) {
-      storage = null;
-    }
-    const title = ref<string>(storage?.title ?? "");
-    const tags = ref<string>(storage?.tags ?? "");
-    const abstract = ref<string>(storage?.abstract ?? "");
-    const author = ref<string>(storage?.author ?? "");
+  components: {},
+  setup(props) {
+    console.log(props.article);
+    const title = ref<string>(props.article.title);
+    const tags = ref<string>(props.article.tags.join(" | "));
+    const abstract = ref<string>(props.article.abstract);
+    const author = ref<string>(props.article.author);
 
     const store: Store<RootState> = useStore();
     store.dispatch("site/fetchData");
-
-    // const categoryList = computed((): Array<string> => {
-    //   return store.state.site?.categories.map(value => value.value) ?? [];
-    // });
 
     const categoryList = ref<Array<string>>([
       "前端",
@@ -147,10 +136,6 @@ export default defineComponent({
       }
     );
 
-    const addItem = (newBook: string) => {
-      store.commit("site/" + siteMutationsType.CREATE_BOOK, newBook);
-    };
-
     return {
       book,
       title,
@@ -161,14 +146,13 @@ export default defineComponent({
       info,
       abstract,
       bookList,
-      addItem,
     };
   },
 });
 </script>
 
 <style scoped lang="scss">
-.markdown-head {
+.markdown-mod-head {
   > * {
     margin-bottom: 1rem;
   }

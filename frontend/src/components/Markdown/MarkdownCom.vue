@@ -9,17 +9,31 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from "vue";
+import { computed, defineComponent, PropType, Ref, ref } from "vue";
 import transformMarkdown from "@/controller/Publish/transformMarkdown";
 
 import tabEvent from "@/controller/Publish/keyEvent";
-// import "@/assets/style/github.css";
+import { useRoute } from "vue-router";
+import Article from "@/models/Article";
 
 export default defineComponent({
   name: "MarkdownCom",
-  setup() {
+  props: {
+    article: {
+      type: Object as PropType<Article>,
+    },
+  },
+  setup(props) {
     const storage = window.localStorage.getItem("article_content");
-    const rawStr = ref<string>(storage ? storage : "");
+    const route = useRoute();
+    let rawStr: Ref<string>;
+    if (route.name === "Publish") {
+      rawStr = ref<string>(storage ? storage : "");
+    } else if (route.name === "Modify" && props.article) {
+      rawStr = ref<string>(props.article.content);
+    } else {
+      rawStr = ref<string>("");
+    }
     const markdowned = computed(() => {
       return transformMarkdown(rawStr.value);
     });

@@ -11,6 +11,7 @@
     <div class="fix-button loading-in" v-if="loaded">
       <LoginModal v-if="!logined" />
       <LogoutConfirm v-else />
+      <ModifyConfirm v-if="logined" />
       <DeleteArticleModal v-if="logined" :article="article" />
     </div>
   </div>
@@ -30,6 +31,7 @@ import LogoutConfirm from "@/components/Confirm/LogoutConfirm.vue";
 import { Store, useStore } from "vuex";
 import { RootState } from "@/store/types";
 import DeleteArticleModal from "@/components/Modal/DeleteArticleModal.vue";
+import ModifyConfirm from "@/components/Confirm/ModifyConfirm.vue";
 
 export default defineComponent({
   name: "ArticlePage",
@@ -40,6 +42,7 @@ export default defineComponent({
     LogoutConfirm,
     LoginModal,
     DeleteArticleModal,
+    ModifyConfirm,
   },
   setup() {
     const route = useRoute();

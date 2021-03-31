@@ -4,6 +4,7 @@
     shape="circle"
     size="large"
     type="primary"
+    title="发布"
     @click="goPublish"
   >
     <EditTwoTone twoToneColor="#ffffff" />
